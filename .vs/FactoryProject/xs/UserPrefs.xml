@@ -1,0 +1,21 @@
+﻿<Properties StartupConfiguration="{1072F0FA-2A86-438E-9D33-AAEC9065BEBC}|https" GitUserInfo="UsingGIT">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.FactoryProject PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.Workbench>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="FactoryProject" expanded="True">
+            <Node name="FactoryProject" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Models" expanded="True" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints />
+</Properties>
