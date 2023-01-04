@@ -15,15 +15,12 @@
 /Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/FactoryProject.dll
 /Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/FactoryProject.pdb
 /Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Humanizer.dll
-/Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/MessagePack.dll
-/Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/MessagePack.Annotations.dll
 /Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/System.Web.Cors.dll
 /Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/System.Net.Http.Formatting.dll
 /Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/System.Web.Http.dll
 /Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/System.Web.Http.Cors.dll
 /Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Microsoft.AspNetCore.Razor.Language.dll
 /Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Microsoft.Bcl.AsyncInterfaces.dll
-/Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Microsoft.Build.Locator.dll
 /Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Microsoft.CodeAnalysis.AnalyzerUtilities.dll
 /Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Microsoft.CodeAnalysis.dll
 /Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Microsoft.CodeAnalysis.CSharp.dll
@@ -49,7 +46,6 @@
 /Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Sqlite.dll
 /Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Sqlite.Design.dll
 /Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Microsoft.Extensions.DependencyModel.dll
-/Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Microsoft.VisualStudio.Debugger.Contracts.dll
 /Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Microsoft.VisualStudio.Web.CodeGeneration.dll
 /Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Microsoft.VisualStudio.Web.CodeGeneration.Core.dll
 /Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/dotnet-aspnet-codegenerator-design.dll
@@ -287,3 +283,8 @@
 /Users/roy/Projects/FactoryProject/FactoryProject/obj/Debug/net7.0/FactoryProject.pdb
 /Users/roy/Projects/FactoryProject/FactoryProject/obj/Debug/net7.0/FactoryProject.genruntimeconfig.cache
 /Users/roy/Projects/FactoryProject/FactoryProject/obj/Debug/net7.0/ref/FactoryProject.dll
+/Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Microsoft.Build.dll
+/Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Microsoft.Build.Framework.dll
+/Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Microsoft.CodeAnalysis.Elfie.dll
+/Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Microsoft.NET.StringTools.dll
+/Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/System.Reflection.MetadataLoadContext.dll

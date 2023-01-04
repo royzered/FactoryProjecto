@@ -28,27 +28,32 @@ namespace FactoryProject.Controllers
 
         // GET: api/Employees/5
         [HttpGet("{id}", Name = "GetEmployee")]
-        public string Get(int id)
+        public Employees Get(int id)
         {
-            return "value";
+            return _employeesBL.GetEmployee(id);
         }
 
         // POST: api/Employees
         [HttpPost]
-        public void Post([FromBody] string value)
+        public string Post(Employees newEmployee)
         {
+            _employeesBL.AddEmployee(newEmployee);
+            return $"Employee [ID #{newEmployee.id} Added.";
+
         }
 
         // PUT: api/Employees/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public string Put(int id, Employees EmployeeUpdate)
         {
+            return _employeesBL.UpdateEmployee(id, EmployeeUpdate); 
         }
 
         // DELETE: api/Employees/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public string DeleteEmployee(int id)
         {
+            return _employeesBL.DeleteEmployee(id);
         }
     }
 }
