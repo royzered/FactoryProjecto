@@ -22,33 +22,33 @@ namespace FactoryProject.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public IEnumerable<Users> Get()
+        public IEnumerable<Users> GetUsers()
         {
             return _usersBL.GetUsers();
         }
 
         // GET: api/Users/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("{id}", Name = "GetUser")]
+        public string GetUser(int id)
         {
             return "value";
         }
 
         // POST: api/Users
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void PostUser([FromBody] string value)
         {
         }
 
         // PUT: api/Users/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void PutUser(int id, [FromBody] string value)
         {
         }
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void DeleteUser(int id)
         {
         }
     }

@@ -11,6 +11,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<DataContext>(x => x.UseSqlite(connectionString));
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<UsersBL>();
+builder.Services.AddScoped<EmployeesBL>();
+
 
 var app = builder.Build();
 

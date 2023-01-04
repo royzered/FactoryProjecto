@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FactoryProject.Models
 {
-	public class ids
+	public class IDs
 	{
         [Key]
         public int id { get; set; }

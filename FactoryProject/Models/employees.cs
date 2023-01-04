@@ -7,8 +7,10 @@ namespace FactoryProject.Models
     { 
             [Key]
         public int id { get; set; }
-        public string? deparmentName { get; set; }
-        public int manager { get; set; }
+        public string? firstName { get; set; }
+        public string? lastName { get; set; }
+        public int startYear { get; set; }
+   
 
     }
 }
