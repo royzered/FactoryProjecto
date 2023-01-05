@@ -46,7 +46,8 @@ namespace FactoryProject.Controllers
         [HttpPut("{id}")]
         public string Put(int id, Employees EmployeeUpdate)
         {
-            return _employeesBL.UpdateEmployee(id, EmployeeUpdate); 
+            _employeesBL.UpdateEmployee(id, EmployeeUpdate);
+            return $"Employee ID {id} Has Been Updated.";
         }
 
         // DELETE: api/Employees/5
