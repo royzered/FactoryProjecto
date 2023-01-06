@@ -13,6 +13,7 @@ builder.Services.AddDbContext<DataContext>(x => x.UseSqlite(connectionString));
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<UsersBL>();
 builder.Services.AddScoped<EmployeesBL>();
+builder.Services.AddScoped<DepartmentsBL>();
 builder.Services.AddCors();
 
 

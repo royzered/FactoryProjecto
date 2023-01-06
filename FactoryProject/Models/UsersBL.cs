@@ -16,6 +16,10 @@ namespace FactoryProject.Models
 		{
 			return _context.Users.ToList();
 		}
+
+        
+
+    
 		
 	}
 }
