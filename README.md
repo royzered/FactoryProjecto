@@ -4,8 +4,9 @@ First full stack project.
 
 # Need To Do
 ------------
-1. Join tables.
-2. Fix unhandled promise from EmployeesBL.
+1. Recreate departments table due to a typo in one of the columns... :(
+2. Join tables.
+3. Fix unhandled promise from EmployeesBL.
 ...
 ..
 .
