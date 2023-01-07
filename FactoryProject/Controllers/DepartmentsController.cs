@@ -21,14 +21,14 @@ namespace FactoryProject
         
         // GET: api/Departments
         [HttpGet]
-        public IEnumerable<Departments> GetDepartments()
+        public IEnumerable<DepartmentsWname> GetDepartments()
         {
             return _departmentsBL.getDepartments();
         }
 
         // GET: api/Departments/5
         [HttpGet("{id}", Name = "Get")]
-        public Departments GetDepartment(int id)
+        public DepartmentsWname GetDepartment(int id)
         {
             return _departmentsBL.getDepartment(id);
         }
