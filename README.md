@@ -1,12 +1,10 @@
 # FactoryProjecto
-A simple full stack project, work in progress.
-First full stack project.
+-----------------
+First full stack project, a factory management website.
+work in progress, maybe I should've made the repo private but w/e...
+
 
 # Need To Do
 ------------
-1. Recreate departments table due to a typo in one of the columns... :(
-2. Join tables.
-3. Fix unhandled promise from EmployeesBL.
-...
-..
-.
+1. Join tables...
+2. Check the unhandled promise in client, shows even though changes in the database are made.
