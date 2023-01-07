@@ -39,6 +39,43 @@ namespace FactoryProject.Models
 			return departmentW;
 		}
 
+		public void AddDepartment(Departments newDepartment) 
+		{
+			_context.Departments.Add(newDepartment);
+			_context.SaveChanges();
+		}
 
+		public void EditDepartment(int id, Departments DepartmentEdit) 
+		{
+			var oldDepartment = _context.Departments.Where(department => department.id == id).First();
+			oldDepartment.departmentName = DepartmentEdit.departmentName;
+			oldDepartment.manager = DepartmentEdit.manager;
+			_context.SaveChanges();
+		}
+
+		public void DeleteDepartment(int id) 
+		{
+			var DeleteDepartment = _context.Departments.Where(department => department.id == id).First();
+			bool NoEmployeesCheck = true;
+
+			foreach (var employee in _context.Employees)
+			{
+				if(employee.departmentID != DeleteDepartment.id)
+				{
+					NoEmployeesCheck = true;
+				}
+
+				else
+				{
+					NoEmployeesCheck = false;
+				}
+			}
+
+			if(NoEmployeesCheck == true) 
+			{
+				_context.Remove(DeleteDepartment);
+				_context.SaveChanges();
+			}
+		}
     }
 }

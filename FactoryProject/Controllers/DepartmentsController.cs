@@ -35,8 +35,11 @@ namespace FactoryProject
 
         // POST: api/Departments
         [HttpPost]
-        public void Post([FromBody] string value)
+        public string Post(Departments NewDepartment)
         {
+            _departmentsBL.AddDepartment(NewDepartment);
+            return $"Department ID {NewDepartment.id} - {NewDepartment.departmentName} Added.";
+
         }
 
         // PUT: api/Departments/5
