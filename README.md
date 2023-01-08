@@ -1,10 +1,19 @@
 # FactoryProjecto
 -----------------
-First full stack project, a factory management website.
-work in progress, maybe I should've made the repo private but w/e...
+A factory management project website, Project #1 FSC.
 
 
-# Need To Do
+# In Progress
 ------------
-1. Join tables...
-2. Check the unhandled promise in client, shows even though changes in the database are made.
+1. Join tables.
+2. Continue BLs and Controllers.
+
+
+
+# Need To Do 
+------------
+1. Client side - UI Design and functionality.
+
+
+[work in progress, maybe I should've made the repo private but w/e...]
+

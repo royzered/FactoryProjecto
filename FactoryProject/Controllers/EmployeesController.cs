@@ -38,8 +38,7 @@ namespace FactoryProject.Controllers
         public string Post(Employees newEmployee)
         {
             _employeesBL.AddEmployee(newEmployee);
-            return $"Employee [ID # {newEmployee.id} Added.";
-
+            return $"Employe ID {newEmployee.id} Added.";
         }
 
         // PUT: api/Employees/5
