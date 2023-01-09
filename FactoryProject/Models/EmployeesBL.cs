@@ -30,24 +30,21 @@ namespace FactoryProject.Models
 		}
 
 
-		public string UpdateEmployee(int id, Employees EmployeeUpdate)
+		public void UpdateEmployee(int id, Employees EmployeeUpdate)
 		{
-			var oldEmployee = _context.Employees.Where(x => x.id == EmployeeUpdate.id).First();
+			var oldEmployee = _context.Employees.Where(x => x.id == id).First();
 			oldEmployee.firstName = EmployeeUpdate.firstName;
             oldEmployee.lastName = EmployeeUpdate.lastName;
 			oldEmployee.startYear = EmployeeUpdate.startYear;
-
+			oldEmployee.departmentID = EmployeeUpdate.departmentID;
 			_context.SaveChanges();
-
-			return $"Employee {id} Has Been Updated.";
         }
 
-		public string DeleteEmployee(int id)
+		public void DeleteEmployee(int id)
 		{
 			var ByeEmployee = _context.Employees.Where(employee => employee.id == id).First();
 			_context.Employees.Remove(ByeEmployee);
 			_context.SaveChanges();
-			return $"Employee [ID ${id} Deleted.";
 		}
 
     }

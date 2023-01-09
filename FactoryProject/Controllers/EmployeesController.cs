@@ -46,14 +46,16 @@ namespace FactoryProject.Controllers
         public string Put(int id, Employees EmployeeUpdate)
         {
             _employeesBL.UpdateEmployee(id, EmployeeUpdate);
-            return $"Employee ID {id} Has Been Updated.";
+            return $"{EmployeeUpdate.firstName} {EmployeeUpdate.lastName}, ID {id} Has Been Updated.";
         }
 
         // DELETE: api/Employees/5
         [HttpDelete("{id}")]
         public string DeleteEmployee(int id)
         {
-            return _employeesBL.DeleteEmployee(id);
+         _employeesBL.DeleteEmployee(id);
+         return $"Employee ID {id} Deleted.";
+
         }
     }
 }
