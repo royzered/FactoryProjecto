@@ -25,7 +25,7 @@ namespace FactoryProject.Models
         public void AddShift(Shift NewShift) 
         {
             _context.Shift.Add(NewShift);
-            _context.SaveChanges();
+            _context.Shift.SaveChanges();
         }
     }
 }
