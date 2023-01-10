@@ -15,6 +15,7 @@ namespace FactoryProject.Data
         public DbSet<Employees> Employees { get; set; }
         public DbSet<Departments> Departments { get; set; }
         public DbSet<Shift> Shifts { get; set; }
+        public DbSet<IDs> IDs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
