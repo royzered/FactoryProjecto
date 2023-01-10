@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using FactoryProject.Models;
 
 namespace FactoryProject
 {
@@ -11,24 +12,34 @@ namespace FactoryProject
     [ApiController]
     public class ShiftsController : ControllerBase
     {
+
+        private readonly ShiftsBL _shiftsBL;
+
+        public ShiftsController(ShiftsBL shiftsBL) {
+            _shiftsBL = shiftsBL;
+        }
+
+
         // GET: api/Shifts
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Shift> GetEmployeeShifts()
         {
-            return new string[] { "value1", "value2" };
+            return _shiftsBL.GetShifts();
         }
 
         // GET: api/Shifts/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("{id}", Name = "GetEmployeeshift")]
+        public string GetEmployeeShift(int id)
         {
             return "value";
         }
 
         // POST: api/Shifts
         [HttpPost]
-        public void Post([FromBody] string value)
+        public string Post(Shift NewShift)
         {
+            _shiftsBL.AddShift(NewShift);
+            return $"Shift {NewShift.id} Added.";
         }
 
         // PUT: api/Shifts/5
