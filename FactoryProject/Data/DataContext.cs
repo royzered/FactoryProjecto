@@ -9,13 +9,12 @@ namespace FactoryProject.Data
     {
         public DataContext(DbContextOptions options) : base(options)
         {
-        
         }
 
         public DbSet<Users> Users { get; set; }
         public DbSet<Employees> Employees { get; set; }
         public DbSet<Departments> Departments { get; set; }
-
+        public DbSet<Shift> Shifts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

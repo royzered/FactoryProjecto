@@ -14,6 +14,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<UsersBL>();
 builder.Services.AddScoped<EmployeesBL>();
 builder.Services.AddScoped<DepartmentsBL>();
+builder.Services.AddScoped<ShiftsBL>();
 builder.Services.AddCors();
 
 
