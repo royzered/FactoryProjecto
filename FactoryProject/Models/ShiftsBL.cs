@@ -25,7 +25,18 @@ namespace FactoryProject.Models
         public void AddShift(Shift NewShift) 
         {
             _context.Shift.Add(NewShift);
-            _context.Shift.SaveChanges();
+            _context.SaveChanges();
+        }
+
+        public void EmployeeToShift(int EmployeeId, int ShiftId)
+        {
+            var employee = _context.Employees.Where(employee => employee.id == EmployeeId).First();
+            var shift = _context.Shift.Where(shift => shift.id == ShiftId).First();
+            IDs NewIds = new IDs();
+            NewIds.employeeID = employee.id;
+            NewIds.shiftID = shift.id;
+            _context.IDs.Add(NewIds);
+            _context.SaveChanges();
         }
     }
 }
