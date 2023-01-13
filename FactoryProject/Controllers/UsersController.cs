@@ -36,8 +36,9 @@ namespace FactoryProject.Controllers
 
         // POST: api/Users
         [HttpPost]
-        public void PostUser([FromBody] string value)
+        public string PostUser([FromBody] Users LoginTry)
         {
+            return _usersBL.LogInUser(LoginTry.userName, LoginTry.password);
         }
 
         // PUT: api/Users/5
