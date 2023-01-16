@@ -1,19 +1,7 @@
 # FactoryProjecto
------------------
-A factory management project website, Project #1 FSC.
 
+Factory Management - A simple CRUD operations web app
 
-# In Progress
-------------
-1. Join tables.
-2. Continue BLs and Controllers.
+Backend built with .NET Core and Frontend will be built with HTML, CSS & JavaScript.
 
-
-
-# Need To Do 
-------------
-1. Client side - UI Design and functionality.
-
-
-[work in progress, maybe I should've made the repo private but w/e...]
-
+**Work in progress**
