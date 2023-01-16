@@ -44,14 +44,18 @@ namespace FactoryProject
 
         // PUT: api/Departments/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public string Put(int id, Departments UpdateDepartment)
         {
+            _departmentsBL.EditDepartment(id, UpdateDepartment);
+            return $"Department ${UpdateDepartment.departmentName} Updated.";
         }
 
         // DELETE: api/Departments/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public string Delete(int id)
         {
+            _departmentsBL.DeleteDepartment(id);
+            return $"Department {id} Deleted.";
         }
     }
 }
