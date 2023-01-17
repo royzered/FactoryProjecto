@@ -15,8 +15,18 @@ builder.Services.AddScoped<UsersBL>();
 builder.Services.AddScoped<EmployeesBL>();
 builder.Services.AddScoped<DepartmentsBL>();
 builder.Services.AddScoped<ShiftsBL>();
-builder.Services.AddCors();
 
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.WithOrigins()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+});
 
 
 var app = builder.Build();

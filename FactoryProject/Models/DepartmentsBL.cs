@@ -41,14 +41,7 @@ namespace FactoryProject.Models
 
 		public void AddDepartment(Departments newDepartment) 
 		{
-			EmployeesBL employeesBL = new EmployeesBL();
-			var newManager = _context.Employees.Where(emp => emp.id == newDepartment.manager).First();
 			_context.Departments.Add(newDepartment);
-            if (newManager.departmentID != newDepartment.id)
-            {
-				
-            }
-
             _context.SaveChanges();
 		}
 
