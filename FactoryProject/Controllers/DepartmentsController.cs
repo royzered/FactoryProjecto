@@ -38,7 +38,7 @@ namespace FactoryProject.Controllers
         public string Post(Departments NewDepartment)
         {
             _departmentsBL.AddDepartment(NewDepartment);
-            return $"Department ID {NewDepartment.id} - {NewDepartment.departmentName} Added.";
+            return $" {NewDepartment.departmentName} ID {NewDepartment.id}, Added.";
 
         }
 

@@ -46,6 +46,7 @@ namespace FactoryProject.Models
 			var NewManager = _context.Employees.Where(employee => employee.id == newDepartment.manager).First();
 			if(NewManager.departmentID != newDepartment.id) {
 				NewManager.departmentID = newDepartment.id;
+				_context.Entry(NewManager).Property("departmentID").IsModified = true;
 				_context.SaveChanges(); 
 			}
 		}
@@ -55,10 +56,11 @@ namespace FactoryProject.Models
 			var oldDepartment = _context.Departments.Where(department => department.id == id).First();
 			oldDepartment.departmentName = DepartmentEdit.departmentName;
 			oldDepartment.manager = DepartmentEdit.manager;
-			// use Update Function for DbContext and accordingly change below to the new function...
 			Employees managerUpdate = _context.Employees.Where(emp => emp.id == DepartmentEdit.manager).First();
-			if(managerUpdate.departmentID != DepartmentEdit.id) {
+			if(managerUpdate.departmentID != DepartmentEdit.id)
+			 {
 				managerUpdate.departmentID = oldDepartment.id;
+				_context.Entry(managerUpdate).Property("departmentID").IsModified = true;
 				_context.SaveChanges();
 			}
 		}
