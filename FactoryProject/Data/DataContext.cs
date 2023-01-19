@@ -20,5 +20,6 @@ namespace FactoryProject.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
         }
+        M
     }
 }

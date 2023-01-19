@@ -37,7 +37,7 @@ namespace FactoryProject.Models
             oldEmployee.lastName = EmployeeUpdate.lastName;
 			oldEmployee.startYear = EmployeeUpdate.startYear;
 			oldEmployee.departmentID = EmployeeUpdate.departmentID;
-			_context.SaveChanges();
+			_context.SaveChanges(); 
         }
 
 		public void DeleteEmployee(int id)

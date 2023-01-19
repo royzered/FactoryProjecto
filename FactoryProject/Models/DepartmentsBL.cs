@@ -10,6 +10,7 @@ namespace FactoryProject.Models
 			_context = context;
 		}
 
+
         public List<DepartmentsWname> getDepartments() {
 			List<DepartmentsWname> departments = new List<DepartmentsWname>();
 
@@ -42,7 +43,11 @@ namespace FactoryProject.Models
 		public void AddDepartment(Departments newDepartment) 
 		{
 			_context.Departments.Add(newDepartment);
-            _context.SaveChanges();
+			var NewManager = _context.Employees.Where(employee => employee.id == newDepartment.manager).First();
+			if(NewManager.departmentID != newDepartment.id) {
+				NewManager.departmentID = newDepartment.id;
+				_context.SaveChanges(); 
+			}
 		}
 
 		public void EditDepartment(int id, Departments DepartmentEdit) 
@@ -50,7 +55,12 @@ namespace FactoryProject.Models
 			var oldDepartment = _context.Departments.Where(department => department.id == id).First();
 			oldDepartment.departmentName = DepartmentEdit.departmentName;
 			oldDepartment.manager = DepartmentEdit.manager;
-			_context.SaveChanges();
+			// use Update Function for DbContext and accordingly change below to the new function...
+			Employees managerUpdate = _context.Employees.Where(emp => emp.id == DepartmentEdit.manager).First();
+			if(managerUpdate.departmentID != DepartmentEdit.id) {
+				managerUpdate.departmentID = oldDepartment.id;
+				_context.SaveChanges();
+			}
 		}
 
 		public void DeleteDepartment(int id) 
