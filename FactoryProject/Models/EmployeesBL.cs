@@ -47,6 +47,19 @@ namespace FactoryProject.Models
 			_context.SaveChanges();
 		}
 
+		public bool IsManager(int id)
+		{
+			var CheckEmployee = _context.Employees.Where(employee => employee.id == id).First();
+			var department = _context.Departments.Where(dep => dep.manager == CheckEmployee.id).First();
+			if(department != null)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
     }
 }
 

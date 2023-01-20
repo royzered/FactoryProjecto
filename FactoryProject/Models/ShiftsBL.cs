@@ -38,5 +38,36 @@ namespace FactoryProject.Models
             _context.IDs.Add(NewIds);
             _context.SaveChanges();
         }
+        
+        public List<EmpShift> GetEmpShifts() //NOTE : This function could probably be more useful if i get EmpShift by ID rather than a list, check later... [Fri 20 Jan]
+        {
+            List<EmpShift> DetailedIds = new List<EmpShift>();
+            var shifts = _context.Shift;
+            foreach (var shift in shifts )
+            {
+                var IdShift = _context.IDs.Where(id => id.shiftID == shift.id).First();
+                EmpShift empShift = new EmpShift();
+                empShift.shiftID = IdShift.shiftID;
+                empShift.employeeID = IdShift.employeeID;
+                var EmployeeName = _context.Employees.Where(emp => emp.id == empShift.employeeID).First();
+                empShift.EmployeeName = EmployeeName.firstName + EmployeeName.lastName;
+                DetailedIds.Add(empShift);
+            }
+            return DetailedIds;
+        }
+
+        public void ChangeEmployeeShift(int EmployeeId, int ShiftChange)
+        {
+            var changeShift = _context.IDs.Where(emp => emp.employeeID == EmployeeId).First();
+            changeShift.shiftID = ShiftChange;
+            _context.SaveChanges();
+        }
+
+        public void DeleteEmployeeShift(int EmployeeId)
+        {
+            var AssignedShift = _context.IDs.Where(shift => shift.employeeID == EmployeeId).First();
+            _context.IDs.Remove(AssignedShift);
+            _context.SaveChanges();
+        }
     }
 }
