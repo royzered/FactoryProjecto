@@ -13,7 +13,8 @@ namespace FactoryProject.Models
         }
 
         public List<Shift> GetShifts() {
-            return _context.Shift.ToList();
+            var shifts = _context.Shift.ToList();
+            return shifts;
         }
 
         public Shift GetShift(int id) 
@@ -39,20 +40,18 @@ namespace FactoryProject.Models
             _context.SaveChanges();
         }
         
-        public List<EmpShift> GetEmpShifts() //NOTE : This function could probably be more useful if i get EmpShift by ID rather than a list, check later... [Fri 20 Jan]
+        public EmpShift GetEmpShifts(int ShiftId) 
         {
-            List<EmpShift> DetailedIds = new List<EmpShift>();
-            var shifts = _context.Shift;
-            foreach (var shift in shifts )
-            {
-                var IdShift = _context.IDs.Where(id => id.shiftID == shift.id).First();
-                EmpShift empShift = new EmpShift();
-                empShift.shiftID = IdShift.shiftID;
-                empShift.employeeID = IdShift.employeeID;
-                var EmployeeName = _context.Employees.Where(emp => emp.id == empShift.employeeID).First();
-                empShift.EmployeeName = EmployeeName.firstName + EmployeeName.lastName;
-                DetailedIds.Add(empShift);
-            }
+            EmpShift DetailedIds = new EmpShift();
+            var shift = _context.Shift.Where(shift => shift.id == ShiftId).First();
+           
+            var IdShift = _context.IDs.Where(id => id.shiftID == shift.id).First();
+            EmpShift empShift = new EmpShift();
+            empShift.shiftID = IdShift.shiftID;
+            empShift.employeeID = IdShift.employeeID;
+            var EmployeeName = _context.Employees.Where(emp => emp.id == empShift.employeeID).First();
+            empShift.EmployeeName = EmployeeName.firstName + EmployeeName.lastName;
+                
             return DetailedIds;
         }
 
