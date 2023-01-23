@@ -13,7 +13,7 @@ namespace FactoryProject.Models
         }
 
         private bool _auth = false;
-        private int _userId = 0;
+        private  int _userId;
 
         public IEnumerable<Users> GetUsers()
 		{
@@ -29,7 +29,7 @@ namespace FactoryProject.Models
             }
             else if(CheckUser != null) 
             {
-                
+                UserRequests();
                 return _auth = true;
             }
             else
@@ -42,15 +42,11 @@ namespace FactoryProject.Models
             return _auth = false;
         }
 
+        public int UserRequests () {
+            var LoggedUser = _context.Users.Where(user => user.id == _userId).First();
+            LoggedUser.numOfActions--;
+            _context.SaveChanges();
 
-        public int UserRequests (int id) {
-            var LoggedUser = _context.Users.Where(user => user.id == id).First();
-            if(_auth == true) {
-            LoggedUser.numOfActions -= LoggedUser.numOfActions;
-            }
-            if(_auth == false) {
-                _context.SaveChanges();
-            }
             return LoggedUser.numOfActions;
         }
 

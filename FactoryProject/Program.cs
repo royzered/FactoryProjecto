@@ -28,6 +28,11 @@ builder.Services.AddCors(options =>
         });
 });
 
+builder.Services.AddSession( options => {
+    options.Cookie.Name = ".Session";
+    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 

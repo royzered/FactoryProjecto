@@ -38,7 +38,8 @@ namespace FactoryProject.Controllers
         [HttpPost]
         public bool PostUser([FromBody] Users LoginTry)
         {
-            return _usersBL.LogInUser(LoginTry.userName, LoginTry.password);
+           var auth = _usersBL.LogInUser(LoginTry.userName, LoginTry.password);
+            return auth;
         }
 
         // PUT: api/Users/5
