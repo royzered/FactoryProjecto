@@ -28,8 +28,7 @@ namespace FactoryProject.Models
                 return _auth = false;
             }
             else if(CheckUser != null) 
-            {
-                UserRequests();
+            {                
                 return _auth = true;
             }
             else
@@ -42,13 +41,7 @@ namespace FactoryProject.Models
             return _auth = false;
         }
 
-        public int UserRequests () {
-            var LoggedUser = _context.Users.Where(user => user.id == _userId).First();
-            LoggedUser.numOfActions--;
-            _context.SaveChanges();
-
-            return LoggedUser.numOfActions;
-        }
+     
 
 	}
 }
