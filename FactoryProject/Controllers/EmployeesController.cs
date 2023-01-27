@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FactoryProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,7 @@ namespace FactoryProject.Controllers
 
         // GET: api/Employees
         [HttpGet]
+        [Authorize]
         public IEnumerable<Employees> GetEmployees()
         {
             return _employeesBL.GetEmployees();

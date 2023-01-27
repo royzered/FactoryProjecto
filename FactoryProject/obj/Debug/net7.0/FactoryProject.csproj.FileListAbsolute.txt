@@ -578,3 +578,11 @@
 /home/rok/Documents/Programming/FactoryProjecto/FactoryProject/obj/Debug/net7.0/FactoryProject.pdb
 /home/rok/Documents/Programming/FactoryProjecto/FactoryProject/obj/Debug/net7.0/FactoryProject.genruntimeconfig.cache
 /home/rok/Documents/Programming/FactoryProjecto/FactoryProject/obj/Debug/net7.0/ref/FactoryProject.dll
+/home/rok/Documents/Programming/FactoryProjecto/FactoryProject/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/home/rok/Documents/Programming/FactoryProjecto/FactoryProject/bin/Debug/net7.0/Microsoft.IdentityModel.Abstractions.dll
+/home/rok/Documents/Programming/FactoryProjecto/FactoryProject/bin/Debug/net7.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/home/rok/Documents/Programming/FactoryProjecto/FactoryProject/bin/Debug/net7.0/Microsoft.IdentityModel.Logging.dll
+/home/rok/Documents/Programming/FactoryProjecto/FactoryProject/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.dll
+/home/rok/Documents/Programming/FactoryProjecto/FactoryProject/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/home/rok/Documents/Programming/FactoryProjecto/FactoryProject/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll
+/home/rok/Documents/Programming/FactoryProjecto/FactoryProject/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll
