@@ -21,7 +21,7 @@ namespace FactoryProject.Models
         public Users LogInUser(string? UserName, string? Password) 
         {
             var FindUser = _context.Users.Where(user => user.userName == UserName && user.password == Password).First();
-            if(FindUser != null) 
+            if(FindUser.numOfActions > 0) 
             {
                 return FindUser;
             }
