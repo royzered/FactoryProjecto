@@ -23,12 +23,15 @@ namespace FactoryProject.Controllers
             _config = config;
         }
 
-          private string GenerateToken(Users LoginUser) {
+          private string GenerateToken([FromBody] Users LoginUser) {
             var SecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(SecurityKey, SecurityAlgorithms.HmacSha256);
+            
             var Claims = new[] 
             {
-                new Claim(ClaimTypes.NameIdentifier, LoggedUserId.ToString())
+                new Claim(JwtRegisteredClaimNames.Sub, (LoginUser.id).ToString()),
+                 new Claim(JwtRegisteredClaimNames.Name, LoginUser.userName),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
             _config["Jwt:Audience"],
@@ -46,7 +49,6 @@ namespace FactoryProject.Controllers
             return _usersBL.GetUsers();
         }
 
-        int LoggedUserId = 0;
 
         // // GET: api/Users/5
         // [HttpGet("{id}", Name = "GetUser")]
@@ -60,20 +62,23 @@ namespace FactoryProject.Controllers
         public ActionResult LoginUser([FromBody] Users LoginTry)
         {
            var auth = _usersBL.LogInUser(LoginTry.userName, LoginTry.password);
-            if(auth.numOfActions != 0) {
-                var token = GenerateToken(LoginTry);
-            string key = "Token";
-            string value= token;
-            CookieOptions options = new CookieOptions{
-                Expires = DateTime.Now.AddMinutes(30)
-            };
-            Response.Cookies.Append(key, value, options);
-            LoggedUserId = auth.id;
-            return Ok(token);
-            }
+            if(auth.numOfActions > 0) {
+                var token = GenerateToken(auth);
+                var TokenHandler = new JwtSecurityTokenHandler();
+                var SecurityToken = TokenHandler.ReadToken(token) as JwtSecurityToken;
+                var userId = SecurityToken.Claims.First(c => c.Type == JwtRegisteredClaimNames.Sub).Value;
+                CookieOptions cookieOptions = new CookieOptions 
+                {
+                    HttpOnly = true,
+                    Secure = true, 
+                    SameSite = SameSiteMode.None,
+                    IsEssential = true
+                };
+                HttpContext.Response.Cookies.Append("Authorization", "Bearer " + token, cookieOptions);
+                return Ok(token);   
+            } 
             else if(auth.numOfActions == 0) {
                 _usersBL.LogoutUser();
-                Response.Cookies.Delete("Token");
                 return Redirect("xyz");
             }
             else {

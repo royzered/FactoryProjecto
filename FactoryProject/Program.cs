@@ -28,6 +28,7 @@ builder.Services.AddCors(options =>
         {
             builder.WithOrigins()
                 .AllowAnyMethod()
+                .AllowCredentials()
                 .AllowAnyHeader();
         });
 });
@@ -44,14 +45,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidAudience = builder.Configuration["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
-    options.Events = new JwtBearerEvents
-            {
-                OnMessageReceived = context =>
-                {
-                    context.Token = context.Request.Cookies["Token"];
-                    return Task.CompletedTask;
-                }
-            };
 });
 
 
