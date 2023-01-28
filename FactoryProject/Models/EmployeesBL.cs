@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
 using FactoryProject.Data;
+using Microsoft.AspNetCore.Mvc;
+
 namespace FactoryProject.Models
 {
 	public class EmployeesBL
@@ -49,16 +52,7 @@ namespace FactoryProject.Models
 
 		public bool IsManager(int id)
 		{
-			var CheckEmployee = _context.Employees.Where(employee => employee.id == id).First();
-			var department = _context.Departments.Where(dep => dep.manager == CheckEmployee.id).First();
-			if(department != null)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+	return false;
 		}
     }
 }

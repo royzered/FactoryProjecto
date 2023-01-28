@@ -12,7 +12,6 @@ namespace FactoryProject.Models
             _context = context;
         }
 
-        private bool authbool = false;
 
         public IEnumerable<Users> GetUsers()
 		{
@@ -32,9 +31,10 @@ namespace FactoryProject.Models
         }
 
         public bool LogoutUser() {
-            return authbool = false;
+            return false;
         }
-
+        
+         
 
 
 	}

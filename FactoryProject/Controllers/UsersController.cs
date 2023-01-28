@@ -96,10 +96,22 @@ namespace FactoryProject.Controllers
         // {
         // }
 
-        // // DELETE: api/Users/5
-        // [HttpDelete("{id}")]
-        // public void DeleteUser(int id)
-        // {
-        // }
+        //DELETE: api/Users/5
+        [HttpDelete]
+        public bool LogOut(string token)
+        {
+          var TokenHandler = new JwtSecurityTokenHandler();
+                var SecurityToken = TokenHandler.ReadToken(token) as JwtSecurityToken;
+                var userId = SecurityToken.Claims.First(c => c.Type == JwtRegisteredClaimNames.Sub).Value;
+            if(userId != null) 
+            {
+                _usersBL.LogoutUser();
+                return true;
+            }
+            else {
+                return false;
+            }
+
+        }
     }
 }

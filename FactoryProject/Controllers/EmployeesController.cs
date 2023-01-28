@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FactoryProject.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class EmployeesController : ControllerBase
@@ -22,7 +23,6 @@ namespace FactoryProject.Controllers
 
         // GET: api/Employees
         [HttpGet]
-        [Authorize]
         public IEnumerable<Employees> GetEmployees()
         {
             return _employeesBL.GetEmployees();
@@ -57,7 +57,6 @@ namespace FactoryProject.Controllers
         {
          _employeesBL.DeleteEmployee(id);
          return $"Employee ID {id} Deleted.";
-
         }
     }
 }

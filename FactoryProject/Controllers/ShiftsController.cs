@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using FactoryProject.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FactoryProject
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ShiftsController : ControllerBase
