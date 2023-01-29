@@ -7,9 +7,11 @@ using System.Text;
 using Microsoft.AspNetCore.Http;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FactoryProject.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -27,10 +29,10 @@ namespace FactoryProject.Controllers
             var SecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(SecurityKey, SecurityAlgorithms.HmacSha256);
             
-            var Claims = new[] 
+            var Claims = new Claim[] 
             {
                 new Claim(JwtRegisteredClaimNames.Sub, (LoginUser.id).ToString()),
-                 new Claim(JwtRegisteredClaimNames.Name, LoginUser.userName),
+                new Claim(JwtRegisteredClaimNames.Name, LoginUser.userName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
@@ -48,46 +50,34 @@ namespace FactoryProject.Controllers
         {
             return _usersBL.GetUsers();
         }
+     
 
-
-        // // GET: api/Users/5
-        // [HttpGet("{id}", Name = "GetUser")]
-        // public string GetUser(int id)
-        // {
-        //     return "value";
-        // }
+        // GET: api/Users/5
+        [HttpGet("{id}", Name = "GetUser")]
+        public string GetUser(int id)
+         {
+            
+             return "value";
+         }
 
         // POST: api/Users
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult LoginUser([FromBody] Users LoginTry)
         {
            var auth = _usersBL.LogInUser(LoginTry.userName, LoginTry.password);
             if(auth.numOfActions > 0) {
                 var token = GenerateToken(auth);
-                var TokenHandler = new JwtSecurityTokenHandler();
-                var SecurityToken = TokenHandler.ReadToken(token) as JwtSecurityToken;
-                var userId = SecurityToken.Claims.First(c => c.Type == JwtRegisteredClaimNames.Sub).Value;
-                CookieOptions cookieOptions = new CookieOptions 
-                {
-                    HttpOnly = true,
-                    Secure = true, 
-                    SameSite = SameSiteMode.None,
-                    IsEssential = true
-                };
-                HttpContext.Response.Cookies.Append("Authorization", "Bearer " + token, cookieOptions);
-                return Ok(token);   
+                return Ok(token);    
             } 
             else if(auth.numOfActions == 0) {
-                _usersBL.LogoutUser();
+                _usersBL.LogOutUser();
                 return Redirect("xyz");
             }
             else {
                 return BadRequest();
             }
            }
-
-
-
 
 
         // // PUT: api/Users/5
@@ -103,9 +93,9 @@ namespace FactoryProject.Controllers
           var TokenHandler = new JwtSecurityTokenHandler();
                 var SecurityToken = TokenHandler.ReadToken(token) as JwtSecurityToken;
                 var userId = SecurityToken.Claims.First(c => c.Type == JwtRegisteredClaimNames.Sub).Value;
-            if(userId != null) 
+                var logOff =  _usersBL.LogOutUser();
+            if(userId != null && logOff == true) 
             {
-                _usersBL.LogoutUser();
                 return true;
             }
             else {
@@ -115,3 +105,17 @@ namespace FactoryProject.Controllers
         }
     }
 }
+
+
+//Tried to implement a cookie but not successfully, might try and fix later (?)
+               // var TokenHandler = new JwtSecurityTokenHandler();
+                // var SecurityToken = TokenHandler.ReadToken(token) as JwtSecurityToken;
+                // var userId = SecurityToken.Claims.First(c => c.Type == JwtRegisteredClaimNames.Sub).Value;
+                // CookieOptions cookieOptions = new CookieOptions 
+                // {
+                //     HttpOnly = true,
+                //     Secure = true, 
+                //     SameSite = SameSiteMode.None,
+                //     IsEssential = true
+                // };
+                // HttpContext.Response.Cookies.Append("Authorization", "Bearer " + token, cookieOptions);

@@ -30,10 +30,23 @@ namespace FactoryProject.Models
             }
         }
 
-        public bool LogoutUser() {
-            return false;
+        public bool UserActions(int id) {
+            var CurrentUser = _context.Users.Where( user => user.id == id).First();
+            int UserActionsLeft = CurrentUser.numOfActions;
+            if(UserActionsLeft > 0) 
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         
+        public bool LogOutUser() 
+        {
+         return true;   
+        }
          
 
 
