@@ -14,7 +14,7 @@ namespace FactoryProject.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase 
+    public class UsersController : ControllerBase
     {
         private readonly UsersBL _usersBL;
         private readonly IConfiguration _config;

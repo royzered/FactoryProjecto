@@ -2,6 +2,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using FactoryProject.Data;
 using System.Web;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FactoryProject.Models
 {
@@ -39,12 +40,13 @@ namespace FactoryProject.Models
             }
         }
 
-
-        public void GetUserActions()
-        {
+        public int getActions([FromHeader] string token) {
             var TokenHandler = new JwtSecurityTokenHandler();
-            var Key = _config["Jwt:Key"];
-            var Token = HttpContext.Request.Headers["Authorization"];
+            var JsonToken  = TokenHandler.ReadToken(token);
+            var tokenSec = TokenHandler.ReadToken(token) as JwtSecurityToken;
+            var userId =  tokenSec.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Sub).Value;
+            var userActionNum = _context.Users.Where(user => user.id == Int32.Parse(userId)).First();
+            return userActionNum.numOfActions;
         }
 
         public bool LogOutUser() 

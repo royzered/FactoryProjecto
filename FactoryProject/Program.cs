@@ -48,7 +48,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 
 
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -64,8 +63,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseCors();
-
+app.UseCors(builder => builder
+     .AllowAnyOrigin()
+     .AllowAnyMethod()
+     .AllowAnyHeader());   
+ 
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
