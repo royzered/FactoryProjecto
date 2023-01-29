@@ -1,5 +1,8 @@
 ﻿
+using System.IdentityModel.Tokens.Jwt;
 using FactoryProject.Data;
+using System.Web;
+
 namespace FactoryProject.Models
 {
     public class UsersBL
@@ -7,9 +10,13 @@ namespace FactoryProject.Models
   
         private readonly DataContext _context;
 
-        public UsersBL(DataContext context)
+        private readonly IConfiguration _config;
+
+
+        public UsersBL(DataContext context, IConfiguration config)
         {
             _context = context;
+            _config = config;
         }
 
 
@@ -17,6 +24,8 @@ namespace FactoryProject.Models
 		{
 			return _context.Users.ToList();
 		}
+
+
         public Users LogInUser(string? UserName, string? Password) 
         {
             var FindUser = _context.Users.Where(user => user.userName == UserName && user.password == Password).First();
@@ -30,19 +39,14 @@ namespace FactoryProject.Models
             }
         }
 
-        public bool UserActions(int id) {
-            var CurrentUser = _context.Users.Where( user => user.id == id).First();
-            int UserActionsLeft = CurrentUser.numOfActions;
-            if(UserActionsLeft > 0) 
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+
+        public void GetUserActions()
+        {
+            var TokenHandler = new JwtSecurityTokenHandler();
+            var Key = _config["Jwt:Key"];
+            var Token = HttpContext.Request.Headers["Authorization"];
         }
-        
+
         public bool LogOutUser() 
         {
          return true;   

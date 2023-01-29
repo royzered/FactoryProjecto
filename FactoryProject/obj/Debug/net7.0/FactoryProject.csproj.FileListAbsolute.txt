@@ -586,3 +586,11 @@
 /home/rok/Documents/Programming/FactoryProjecto/FactoryProject/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 /home/rok/Documents/Programming/FactoryProjecto/FactoryProject/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll
 /home/rok/Documents/Programming/FactoryProjecto/FactoryProject/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Microsoft.IdentityModel.Logging.dll
+/Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.dll
+/Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll
+/Users/roy/Projects/FactoryProject/FactoryProject/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll

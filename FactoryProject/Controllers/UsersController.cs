@@ -14,7 +14,7 @@ namespace FactoryProject.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class UsersController : ControllerBase 
     {
         private readonly UsersBL _usersBL;
         private readonly IConfiguration _config;
@@ -24,6 +24,8 @@ namespace FactoryProject.Controllers
             _usersBL = usersBL;
             _config = config;
         }
+
+
 
           private string GenerateToken([FromBody] Users LoginUser) {
             var SecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
@@ -88,20 +90,18 @@ namespace FactoryProject.Controllers
 
         //DELETE: api/Users/5
         [HttpDelete]
-        public bool LogOut(string token)
+        public ActionResult LogOut()
         {
-          var TokenHandler = new JwtSecurityTokenHandler();
-                var SecurityToken = TokenHandler.ReadToken(token) as JwtSecurityToken;
-                var userId = SecurityToken.Claims.First(c => c.Type == JwtRegisteredClaimNames.Sub).Value;
-                var logOff =  _usersBL.LogOutUser();
-            if(userId != null && logOff == true) 
+            bool x = _usersBL.LogOutUser();
+            if (x == true)
             {
-                return true;
+                return Redirect("Login Page"); //add path
             }
-            else {
-                return false;
+            else
+            {
+                return BadRequest();
             }
-
+            
         }
     }
 }
