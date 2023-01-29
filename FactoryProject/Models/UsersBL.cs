@@ -40,13 +40,49 @@ namespace FactoryProject.Models
             }
         }
 
-        public int getActions([FromHeader] string token) {
+        public int UserIdFromToken([FromHeader] string token)
+        {
             var TokenHandler = new JwtSecurityTokenHandler();
             var JsonToken  = TokenHandler.ReadToken(token);
-            var tokenSec = TokenHandler.ReadToken(token) as JwtSecurityToken;
-            var userId =  tokenSec.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Sub).Value;
-            var userActionNum = _context.Users.Where(user => user.id == Int32.Parse(userId)).First();
+            var TokenSec = TokenHandler.ReadToken(token) as JwtSecurityToken;
+            var UserId =  TokenSec.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Sub).Value;
+            return Int32.Parse(UserId);
+
+        }
+
+        public int getActions([FromHeader] string token) {
+            int UserId = UserIdFromToken(token);
+            var userActionNum = _context.Users.Where(user => user.id == UserId).First();
             return userActionNum.numOfActions;
+        }
+
+        public void UserActionsHandler([FromHeader] string token) { //NOTE TO SELF: Should use this function in 'PUT' method as it updates the logged in user's API calls limit (numOfActios)
+            int ActionCounter = 0;
+            int UserId = UserIdFromToken(token);
+            var UserActionsLeft = getActions(token);
+            var CurrentUser = _context.Users.Where(user => user.id == UserId).First();
+
+            if(UserActionsLeft > 10) 
+            {
+                ActionCounter++;
+                if(ActionCounter == 10) 
+                {
+                    CurrentUser.numOfActions = CurrentUser.numOfActions - ActionCounter;
+                    _context.SaveChanges();
+                    ActionCounter = 0;
+                }
+                else if (UserActionsLeft < 10)
+                {
+                    ActionCounter++;
+                    if(ActionCounter == 5) 
+                    {
+                    CurrentUser.numOfActions = CurrentUser.numOfActions - ActionCounter;
+                    _context.SaveChanges();
+                    ActionCounter = 0;
+                        
+                    }
+                }
+            }
         }
 
         public bool LogOutUser() 
