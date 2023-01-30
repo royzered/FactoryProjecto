@@ -68,18 +68,40 @@ namespace FactoryProject.Controllers
         public ActionResult LoginUser([FromBody] Users LoginTry)
         {
            var auth = _usersBL.LogInUser(LoginTry.userName, LoginTry.password);
-            if(auth.numOfActions > 0) {
+            if (auth.numOfActions > 0)
+            {
                 var token = GenerateToken(auth);
-                return Ok(token);    
-            } 
-            else if(auth.numOfActions == 0) {
-                _usersBL.LogOutUser();
-                return Redirect("xyz");
+                var LoggedInUser = _usersBL.UserInfoFromToken(token);
+                return Ok(LoggedInUser);
             }
-            else {
-                return BadRequest();
+            else if (auth.numOfActions == 0)
+            {
+                bool LogUserOut = _usersBL.LogOutUser();
+                return Ok(LogUserOut);
+            }
+            else
+            {
+                return BadRequest("Wrong Username or Password, please try again.");
             }
            }
+
+        [HttpPost("UserInfo")]
+        public ActionResult UserInfo([FromHeader] string token)
+        {
+                var LoggedInUser = _usersBL.UserInfoFromToken(token);
+  
+            else if (auth.numOfActions == 0)
+            {
+                bool LogUserOut = _usersBL.LogOutUser();
+                return Ok(LogUserOut);
+            }
+            else
+            {
+                return BadRequest("Wrong Username or Password, please try again.");
+            }
+        }
+
+
 
 
         // // PUT: api/Users/5
@@ -95,11 +117,11 @@ namespace FactoryProject.Controllers
             bool x = _usersBL.LogOutUser();
             if (x == true)
             {
-                return Redirect("Login Page"); //add path
+                return Ok(x);
             }
             else
             {
-                return BadRequest();
+                return BadRequest("Oops, Cannot log user out!");
             }
             
         }
