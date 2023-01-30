@@ -10,6 +10,8 @@ namespace FactoryProject.Models
         public int id { get; set; }
 
         public string? departmentName { get; set; }
+        
+        [ForeignKey("employees")]
         public int manager { get; set; }
     }
 }

@@ -55,8 +55,15 @@ namespace FactoryProject.Controllers
         [HttpDelete("{id}")]
         public string DeleteEmployee(int id)
         {
-         _employeesBL.DeleteEmployee(id);
-         return $"Employee ID {id} Deleted.";
+         var DeletedEmp = _employeesBL.DeleteEmployee(id);
+         if(DeletedEmp == true)
+         {
+                     return $"Employee ID {id} Deleted.";
+         }
+         else 
+         {
+            return $"Could not delete Employee ID {id}";
+         }
         }
     }
 }

@@ -43,16 +43,29 @@ namespace FactoryProject.Models
 			_context.SaveChanges(); 
         }
 
-		public void DeleteEmployee(int id)
+		public bool DeleteEmployee(int id)
 		{
 			var ByeEmployee = _context.Employees.Where(employee => employee.id == id).First();
-			_context.Employees.Remove(ByeEmployee);
-			_context.SaveChanges();
-		}
+			var FindDepartment = _context.Departments.Where(dep => dep.manager == id).First();
+			if(FindDepartment.manager == id)
+			{
+				FindDepartment.manager = 0;
+				_context.Employees.Remove(ByeEmployee);
+				_context.SaveChanges();
+				return true;
 
-		public bool IsManager(int id)
-		{
-	return false;
+			}
+			else if (FindDepartment.manager != null)
+			{
+				_context.Employees.Remove(ByeEmployee);
+				_context.SaveChanges();
+				return true;
+			}
+			else 
+			{
+				return false;
+			}
+
 		}
     }
 }
