@@ -86,19 +86,10 @@ namespace FactoryProject.Controllers
            }
 
         [HttpPost("UserInfo")]
-        public ActionResult UserInfo([FromHeader] string token)
+        public ActionResult UserInfo([FromBody] string token)
         {
-                var LoggedInUser = _usersBL.UserInfoFromToken(token);
-  
-            else if (auth.numOfActions == 0)
-            {
-                bool LogUserOut = _usersBL.LogOutUser();
-                return Ok(LogUserOut);
-            }
-            else
-            {
-                return BadRequest("Wrong Username or Password, please try again.");
-            }
+            var oooo = _usersBL.UserInfoFromToken(token);
+            return Ok(oooo);
         }
 
 
