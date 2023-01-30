@@ -11,7 +11,6 @@ namespace FactoryProject.Models
 
         public string? departmentName { get; set; }
         
-        [ForeignKey("employees")]
         public int manager { get; set; }
     }
 }

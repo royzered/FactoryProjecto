@@ -21,7 +21,7 @@ namespace FactoryProject.Models
 				DepartmentsWname newDepartment = new DepartmentsWname();
 				newDepartment.id = deparment.id;
 				newDepartment.departmentName = deparment.departmentName;
-				newDepartment.manager = deparment.manager;
+				newDepartment.manager = (int)deparment.manager;
 				newDepartment.managerName = $"{employees.firstName} {employees.lastName}";
 				departments.Add(newDepartment);
 			}
@@ -33,7 +33,7 @@ namespace FactoryProject.Models
 			var department = _context.Departments.Where(department => department.id == id).First();
 			departmentW.id = department.id;
 			departmentW.departmentName = department.departmentName;
-			departmentW.manager = department.manager;
+			departmentW.manager = (int)department.manager;
 			var employee = _context.Employees.Where(employee => employee.id == id).First();
 			departmentW.managerName = $"{employee.firstName} {employee.lastName}";
 
@@ -43,12 +43,7 @@ namespace FactoryProject.Models
 		public void AddDepartment(Departments newDepartment) 
 		{
 			_context.Departments.Add(newDepartment);
-			var NewManager = _context.Employees.Where(employee => employee.id == newDepartment.manager).First();
-			if(NewManager.departmentID != newDepartment.id) {
-				NewManager.departmentID = newDepartment.id;
-				_context.Entry(NewManager).Property("departmentID").IsModified = true;
-				_context.SaveChanges(); 
-			}
+			_context.SaveChanges();  
 		}
 
 		public void EditDepartment(int id, Departments DepartmentEdit) 
@@ -68,26 +63,9 @@ namespace FactoryProject.Models
 		public void DeleteDepartment(int id) 
 		{
 			var DeleteDepartment = _context.Departments.Where(department => department.id == id).First();
-			bool NoEmployeesCheck = true;
-
-			foreach (var employee in _context.Employees)
-			{
-				if(employee.departmentID != DeleteDepartment.id)
-				{
-					NoEmployeesCheck = true;
-				}
-
-				else
-				{
-					NoEmployeesCheck = false;
-				}
-			}
-
-			if(NoEmployeesCheck == true) 
-			{
-				_context.Remove(DeleteDepartment);
+				_context.Departments.Remove(DeleteDepartment);
 				_context.SaveChanges();
-			}
+		
 		}
     }
 }
