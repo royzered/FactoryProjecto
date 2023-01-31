@@ -52,6 +52,7 @@ namespace FactoryProject.Models
 			var IsDepartmentManager = _context.Departments.Where(dep => dep.manager == ByeEmployee.id).FirstOrDefault();
 			if(IsDepartmentManager != null)
 			{
+				IsDepartmentManager.manager = 0;
 				_context.Entry(IsDepartmentManager).Property("manager").IsModified = true;
 			}
 				_context.Employees.Remove(ByeEmployee);

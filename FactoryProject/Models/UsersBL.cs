@@ -51,7 +51,6 @@ namespace FactoryProject.Models
             var user = _context.Users.Where(user => user.id == Int32.Parse(UserId)).First();
             CurrentUserInfo currentUser = new CurrentUserInfo
             {
-                token = token,
                 CurrentUserID = user.id,
                 CurrentUserName = user.userName,
                 CurrentuserActionsleft = user.numOfActions,

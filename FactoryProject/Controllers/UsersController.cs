@@ -64,7 +64,7 @@ namespace FactoryProject.Controllers
 
         // POST: api/Users
         [AllowAnonymous]
-        [HttpPost()]
+        [HttpPost]
         public ActionResult LoginUser([FromBody] Users LoginTry)
         {
            var auth = _usersBL.LogInUser(LoginTry.userName, LoginTry.password);

@@ -48,7 +48,17 @@ namespace FactoryProject.Models
 
 		public void AddDepartment(Departments newDepartment) 
 		{
-			_context.Departments.Add(newDepartment);
+			//var splash = _context.Departments.Add(newDepartment);
+			// if(splash.Entity.manager != null)
+			// {
+			// 	var CheckManager = _context.Employees.Where(emp => emp.id == splash.Entity.manager).FirstOrDefault();
+			// 	if(CheckManager != null)
+			// 	{
+			// 		CheckManager.departmentID = splash.Entity.id;
+			// 		_context.Entry(CheckManager).Property("departmentID").IsModified = true;
+			// 	}	
+			// }
+			 _context.Departments.Add(newDepartment);
 			_context.SaveChanges();  
 		}
 
@@ -61,20 +71,28 @@ namespace FactoryProject.Models
 				oldDepartment.manager = DepartmentEdit.manager;
 				Employees managerUpdate = _context.Employees.Where(emp => emp.id == DepartmentEdit.manager).First();
 				if(managerUpdate.departmentID != DepartmentEdit.id)
-				 {
-				managerUpdate.departmentID = oldDepartment.id;
-				_context.Entry(managerUpdate).Property("departmentID").IsModified = true;
+				{
+					managerUpdate.departmentID = oldDepartment.id;
+					_context.Entry(managerUpdate).Property("departmentID").IsModified = true;
 				}
 			}
 			_context.SaveChanges();
 			}
 		
-		public void DeleteDepartment(int id) 
+		public bool DeleteDepartment(int id) 
 		{
 			var DeleteDepartment = _context.Departments.Where(department => department.id == id).First();
+			bool EmployeesLeft = _context.Employees.Where(emp => emp.departmentID == id).Any();
+			if(EmployeesLeft == false)
+			{
 				_context.Departments.Remove(DeleteDepartment);
 				_context.SaveChanges();
-		
+				return true;
+			}
+			else 
+			{
+				return false;
+			}
 		}
     }
 }

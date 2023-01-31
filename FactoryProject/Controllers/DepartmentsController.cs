@@ -54,10 +54,17 @@ namespace FactoryProject.Controllers
 
         // DELETE: api/Departments/5
         [HttpDelete("{id}")]
-        public string Delete(int id)
+        public ActionResult Delete(int id)
         {
-            _departmentsBL.DeleteDepartment(id);
-            return $"Department {id} Deleted.";
+            var DepartmentDeleted = _departmentsBL.DeleteDepartment(id);
+            if(DepartmentDeleted == true) 
+            {
+                return Ok($"Department {id} Has Been Deleted.");
+            }
+            else 
+            {
+                return BadRequest($"Could Not Delete Department {id}, there are employees in this departemnt");
+            }
         }
     }
 }
