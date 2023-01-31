@@ -9,7 +9,7 @@ namespace FactoryProject.Models
             [Key]
         public int id { get; set; }
         public string? departmentName { get; set; }
-        public int manager { get; set; }
+        public int? manager { get; set; }
         
         public string? managerName { get;set;}
     }

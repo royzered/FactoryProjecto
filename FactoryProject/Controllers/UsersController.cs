@@ -64,15 +64,14 @@ namespace FactoryProject.Controllers
 
         // POST: api/Users
         [AllowAnonymous]
-        [HttpPost]
+        [HttpPost()]
         public ActionResult LoginUser([FromBody] Users LoginTry)
         {
            var auth = _usersBL.LogInUser(LoginTry.userName, LoginTry.password);
             if (auth.numOfActions > 0)
             {
                 var token = GenerateToken(auth);
-                var LoggedInUser = _usersBL.UserInfoFromToken(token);
-                return Ok(LoggedInUser);
+                return Ok(token);
             }
             else if (auth.numOfActions == 0)
             {

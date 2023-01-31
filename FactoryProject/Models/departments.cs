@@ -11,7 +11,7 @@ namespace FactoryProject.Models
 
         public string? departmentName { get; set; }
         
-        public int manager { get; set; }
+        public int? manager { get; set; }
     }
 }
 

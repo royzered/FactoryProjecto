@@ -30,10 +30,12 @@ namespace FactoryProject.Models
         public Users LogInUser(string? UserName, string? Password) 
         {
             var FindUser = _context.Users.Where(user => user.userName == UserName && user.password == Password).First();
+
             if(FindUser.numOfActions > 0) 
             {
                 return FindUser;
             }
+
             else
             {
                 return null;
@@ -49,6 +51,7 @@ namespace FactoryProject.Models
             var user = _context.Users.Where(user => user.id == Int32.Parse(UserId)).First();
             CurrentUserInfo currentUser = new CurrentUserInfo
             {
+                token = token,
                 CurrentUserID = user.id,
                 CurrentUserName = user.userName,
                 CurrentuserActionsleft = user.numOfActions,
