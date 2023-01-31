@@ -8,6 +8,8 @@ namespace FactoryProject.Models
             public string CurrentUserName { get; set; }
             public int CurrentuserActionsleft { get; set; }
 
+            public string CurrentReqDate { get; set; }
+
     };
 }
 

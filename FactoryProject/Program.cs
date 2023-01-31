@@ -21,6 +21,7 @@ builder.Services.AddScoped<EmployeesBL>();
 builder.Services.AddScoped<DepartmentsBL>();
 builder.Services.AddScoped<ShiftsBL>();
 
+builder.Services.AddTransient<UsersBL, UsersBL>();
 
 builder.Services.AddCors(options =>
 {
@@ -47,7 +48,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -72,6 +72,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
+app.UseMiddleware<CallCOunterMiddleware>();
 
 app.MapControllerRoute(
     name: "default",

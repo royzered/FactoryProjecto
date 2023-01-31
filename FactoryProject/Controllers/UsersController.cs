@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace FactoryProject.Controllers
 {
@@ -24,7 +25,6 @@ namespace FactoryProject.Controllers
             _usersBL = usersBL;
             _config = config;
         }
-
 
 
           private string GenerateToken([FromBody] Users LoginUser) {
@@ -48,7 +48,7 @@ namespace FactoryProject.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public IEnumerable<Users> GetUsers()
+        public int GetUsers()
         {
             return _usersBL.GetUsers();
         }
@@ -83,6 +83,9 @@ namespace FactoryProject.Controllers
                 return BadRequest("Wrong Username or Password, please try again.");
             }
            }
+
+
+
 
         [HttpPost("UserInfo")]
         public ActionResult UserInfo([FromBody] string token)

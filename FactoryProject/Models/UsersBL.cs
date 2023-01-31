@@ -4,6 +4,8 @@ using FactoryProject.Data;
 using System.Web;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.Common;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Http;
 
 namespace FactoryProject.Models
 {
@@ -13,7 +15,8 @@ namespace FactoryProject.Models
         private readonly DataContext _context;
 
         private readonly IConfiguration _config;
-
+        
+        private static int ActionCounter = 0;
 
         public UsersBL(DataContext context, IConfiguration config)
         {
@@ -22,10 +25,13 @@ namespace FactoryProject.Models
         }
 
 
-        public IEnumerable<Users> GetUsers()
+        public int GetUsers()
 		{
-			return _context.Users.ToList();
+          ActionCounter =  CallCOunterMiddleware.GetCount();
+			return  ActionCounter;
 		}
+
+       
 
         public Users LogInUser(string? UserName, string? Password) 
         {
@@ -54,42 +60,12 @@ namespace FactoryProject.Models
                 CurrentUserID = user.id,
                 CurrentUserName = user.userName,
                 CurrentuserActionsleft = user.numOfActions,
+                CurrentReqDate = DateTime.Today.ToShortDateString()
 
             };
-        
             return currentUser;
         }
 
-
-        public void UserActionsHandler([FromHeader] string token) { //NOTE TO SELF: Should use this function in 'PUT' method as it updates the logged in user's API calls limit (numOfActios)
-            int ActionCounter = 0;
-            int MaxActions = 60;
-            CurrentUserInfo currentUser = UserInfoFromToken(token);
-            var userInDb = _context.Users.Where(user => user.id == currentUser.CurrentUserID).First();
-            int UserActionsLeft = currentUser.CurrentuserActionsleft;
-
-            if (UserActionsLeft > 10) 
-            {
-                ActionCounter++;
-                if(ActionCounter == 10) 
-                {
-                    userInDb.numOfActions = userInDb.numOfActions - ActionCounter;
-                    _context.SaveChanges();
-                    ActionCounter = 0;
-                }
-                else if (UserActionsLeft < 10)
-                {
-                    ActionCounter++;
-                    if(ActionCounter == 5) 
-                    {
-                     userInDb.numOfActions = userInDb.numOfActions - ActionCounter;
-                    _context.SaveChanges();
-                    ActionCounter = 0;
-                        
-                    }
-                }
-            }
-        }
 
 
         public bool LogOutUser() 
