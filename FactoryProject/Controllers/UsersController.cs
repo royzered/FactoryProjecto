@@ -50,7 +50,7 @@ namespace FactoryProject.Controllers
         [HttpGet]
         public int GetUsers()
         {
-            return _usersBL.GetUsers();
+            return _usersBL.UserActionLimit();
         }
      
 

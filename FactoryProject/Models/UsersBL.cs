@@ -17,6 +17,7 @@ namespace FactoryProject.Models
         private readonly IConfiguration _config;
         
         private static int ActionCounter = 0;
+         private static CurrentUserInfo currentUser = new CurrentUserInfo();
 
         public UsersBL(DataContext context, IConfiguration config)
         {
@@ -25,10 +26,15 @@ namespace FactoryProject.Models
         }
 
 
-        public int GetUsers()
+        public int UserActionLimit()
 		{
-          ActionCounter =  CallCOunterMiddleware.GetCount();
-			return  ActionCounter;
+            int maxActions = 60;
+            var UserInDb = _context.Users.Where(user => user.id == currentUser.CurrentUserID).First();
+            var ActionsLeft = UserInDb.numOfActions;
+            ActionCounter =  CallCOunterMiddleware.GetCount(ActionsLeft);
+            ActionsLeft = ActionCounter;
+            _context.SaveChanges();
+            return  ActionsLeft;
 		}
 
        
@@ -55,7 +61,7 @@ namespace FactoryProject.Models
             var TokenSec = TokenHandler.ReadToken(token) as JwtSecurityToken;
             var UserId =  TokenSec.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Sub).Value;
             var user = _context.Users.Where(user => user.id == Int32.Parse(UserId)).First();
-            CurrentUserInfo currentUser = new CurrentUserInfo
+             currentUser = new CurrentUserInfo
             {
                 CurrentUserID = user.id,
                 CurrentUserName = user.userName,

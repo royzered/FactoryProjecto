@@ -21,7 +21,6 @@ builder.Services.AddScoped<EmployeesBL>();
 builder.Services.AddScoped<DepartmentsBL>();
 builder.Services.AddScoped<ShiftsBL>();
 
-builder.Services.AddTransient<UsersBL, UsersBL>();
 
 builder.Services.AddCors(options =>
 {
