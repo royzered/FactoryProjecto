@@ -20,6 +20,8 @@ namespace FactoryProject.Controllers
         private readonly UsersBL _usersBL;
         private readonly IConfiguration _config;
 
+
+
         public UsersController(UsersBL usersBL, IConfiguration config)
         {
             _usersBL = usersBL;
@@ -40,7 +42,7 @@ namespace FactoryProject.Controllers
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
             _config["Jwt:Audience"],
             Claims,
-            expires: DateTime.Now.AddMinutes(30),
+            expires: DateTime.Now.AddMinutes(60),
             signingCredentials: credentials);
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
@@ -48,18 +50,18 @@ namespace FactoryProject.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public int GetUsers()
-        {
-            return _usersBL.UserActionLimit();
-        }
+         public int GetUsers()
+         {
+             return _usersBL.UserActionLimit();
+         }
      
 
         // GET: api/Users/5
         [HttpGet("{id}", Name = "GetUser")]
-        public string GetUser(int id)
+        public int GetUser()
          {
             
-             return "value";
+             return 1;
          }
 
         // POST: api/Users
@@ -98,10 +100,11 @@ namespace FactoryProject.Controllers
 
 
         // // PUT: api/Users/5
-        // [HttpPut("{id}")]
-        // public void PutUser(int id, [FromBody] string value)
-        // {
-        // }
+        [HttpPut("{id}")]
+        public int UpdateLoggedUserActoinLinit()
+        {
+             return _usersBL.UserActionLimit();
+        }
 
         //DELETE: api/Users/5
         [HttpDelete]
@@ -110,7 +113,7 @@ namespace FactoryProject.Controllers
             bool x = _usersBL.LogOutUser();
             if (x == true)
             {
-                return Ok(x);
+                return Ok("User Logged out successfuly");
             }
             else
             {

@@ -17,7 +17,10 @@ namespace FactoryProject.Models
         private readonly IConfiguration _config;
         
         private static int ActionCounter = 0;
-         private static CurrentUserInfo currentUser = new CurrentUserInfo();
+
+        private static string? LoggedOutAt;
+
+         private static Users currentUser = new Users();
 
         public UsersBL(DataContext context, IConfiguration config)
         {
@@ -25,16 +28,29 @@ namespace FactoryProject.Models
             _config = config;
         }
 
+        public int GetUser() 
+        {
+            // var TokenHandler = new JwtSecurityTokenHandler();
+            // var JsonToken  = TokenHandler.ReadToken(token);
+            // var TokenSec = TokenHandler.ReadToken(token) as JwtSecurityToken;
+            // var UserId =  TokenSec.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Sub).Value;
+        
+            // var UserInDb = _context.Users.Where(user => user.id == Int32.Parse(UserId)).First();
+            // return UserInDb;
+            return ActionCounter;
+
+        }
+
 
         public int UserActionLimit()
 		{
-            int maxActions = 60;
-            var UserInDb = _context.Users.Where(user => user.id == currentUser.CurrentUserID).First();
-            var ActionsLeft = UserInDb.numOfActions;
+            var ActionsLeft = currentUser.numOfActions;
             ActionCounter =  CallCOunterMiddleware.GetCount(ActionsLeft);
             ActionsLeft = ActionCounter;
-            _context.SaveChanges();
-            return  ActionsLeft;
+            var current = _context.Users.Where(user => user.id == currentUser.id).First();
+            current.numOfActions = ActionsLeft;
+            _context.SaveChangesAsync();
+            return  current.numOfActions;
 		}
 
        
@@ -45,6 +61,7 @@ namespace FactoryProject.Models
 
             if(FindUser.numOfActions > 0) 
             {
+                currentUser = FindUser;
                 return FindUser;
             }
 
@@ -61,7 +78,7 @@ namespace FactoryProject.Models
             var TokenSec = TokenHandler.ReadToken(token) as JwtSecurityToken;
             var UserId =  TokenSec.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Sub).Value;
             var user = _context.Users.Where(user => user.id == Int32.Parse(UserId)).First();
-             currentUser = new CurrentUserInfo
+            var CurrentUserLoggedInfo = new CurrentUserInfo
             {
                 CurrentUserID = user.id,
                 CurrentUserName = user.userName,
@@ -69,7 +86,7 @@ namespace FactoryProject.Models
                 CurrentReqDate = DateTime.Today.ToShortDateString()
 
             };
-            return currentUser;
+            return CurrentUserLoggedInfo;
         }
 
 
@@ -78,9 +95,6 @@ namespace FactoryProject.Models
         {
             return true;   
         }
-         
-
-
 	}
 }
 

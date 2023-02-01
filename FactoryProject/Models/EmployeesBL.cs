@@ -45,16 +45,18 @@ namespace FactoryProject.Models
 
 		public bool DeleteEmployee(int id)
 		{
-			using(var transiction = _context.Database.BeginTransaction())
-			{
-				try {
+			
 			var ByeEmployee = _context.Employees.Where(employee => employee.id == id).First();
-			var IsDepartmentManager = _context.Departments.Where(dep => dep.manager == ByeEmployee.id).FirstOrDefault();
-			if(IsDepartmentManager != null)
-			{
+			var CheckDepartmentsManager = _context.Departments.Where(dep => dep.manager == ByeEmployee.id).Any();
+			
+		if(CheckDepartmentsManager == true)
+		{
+		using(var transiction = _context.Database.BeginTransaction())
+		{
+			try {
+			 var IsDepartmentManager =  _context.Departments.Where(dep => dep.manager == ByeEmployee.id).First();
 				IsDepartmentManager.manager = 0;
 				_context.Entry(IsDepartmentManager).Property("manager").IsModified = true;
-			}
 				_context.Employees.Remove(ByeEmployee);
 				_context.SaveChanges();
 				transiction.Commit();
@@ -65,10 +67,17 @@ namespace FactoryProject.Models
 				transiction.Rollback();
 				return false;
 			}
-			}
-			
 		}
 		}
-    }
+		else 
+		{
+			_context.Employees.Remove(ByeEmployee);
+				_context.SaveChanges();
+				return true;
+		}
+	}
+	}
+}
+    
 
 

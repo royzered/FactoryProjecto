@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 public class CallCOunterMiddleware 
 {
     private readonly RequestDelegate  _next;
-    private static int _counter = 60;
+    private static int _counter;
 
     public CallCOunterMiddleware(RequestDelegate next)
     {
@@ -18,7 +18,7 @@ public class CallCOunterMiddleware
         
        if(context.Response.StatusCode == 200)
        {
-        _counter--;
+        _counter++;
        }
 
     }
@@ -28,7 +28,7 @@ public class CallCOunterMiddleware
         int LoggedUserActionLeft = UserActionLeft;
         if(LoggedUserActionLeft > 0)
             {
-                LoggedUserActionLeft = _counter;
+                LoggedUserActionLeft = LoggedUserActionLeft - _counter;
             }
             else if(LoggedUserActionLeft <= 0)
             {
