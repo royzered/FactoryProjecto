@@ -6,7 +6,7 @@ namespace FactoryProject.Models
 	{
         [Key]
         public int id { get; set; }
-        public DateOnly Date { get; set; } //used this instead of DateTime to show Date only, otherwise it'll show also time [00:00 in this case]
+        public DateTime Date { get; set; } 
         public int startTime { get; set; }
         public int endTime { get; set; }
 

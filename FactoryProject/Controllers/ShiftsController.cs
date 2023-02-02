@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FactoryProject
 {
-    [Authorize]
+   // [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ShiftsController : ControllerBase
@@ -24,36 +24,61 @@ namespace FactoryProject
 
         // GET: api/Shifts
         [HttpGet]
-        public IEnumerable<Shift> GetEmployeeShifts()
+        public IEnumerable<Shift> GetShifts()
         {
             return _shiftsBL.GetShifts();
         }
 
+         // GET: api/Shifts/EmpShifts/3
+        [HttpGet("ShiftDetailed")]
+        public IEnumerable<EmpShift> ShiftDetailed(int id)
+        {
+            return _shiftsBL.GetEmpShifts(id);
+        }
+
         // GET: api/Shifts/5
         [HttpGet("{id}", Name = "GetEmployeeshift")]
-        public string GetEmployeeShift(int id)
+        public IEnumerable<EmpShift> GetEmployeeShifts(int id)
         {
-            return "value";
+         return _shiftsBL.GetEmpShifts(id);
+
         }
 
         // POST: api/Shifts
         [HttpPost]
-        public string Post(Shift NewShift)
+        public ActionResult Post(Shift NewShift)
         {
             _shiftsBL.AddShift(NewShift);
-            return $"Shift {NewShift.id} Added.";
+            return Ok("New Shift Added.");
+        
         }
 
-        // PUT: api/Shifts/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPost("EmpToShift")]
+        public ActionResult EmpToShift([FromBody] IDs empShift)
         {
+           var add =  _shiftsBL.EmployeeToShift(empShift);
+           if(add > 0)
+           {
+            return Ok($"{add}, Employee was added to shift successfully.");
+           }
+           else{
+            return BadRequest("Could not assign employee to shift.");
+           }
+        
         }
 
-        // DELETE: api/Shifts/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+
+
+        // // PUT: api/Shifts/5
+        // [HttpPut("{id}")]
+        // public void Put(int id, [FromBody] string value)
+        // {
+        // }
+
+        // // DELETE: api/Shifts/5
+        // [HttpDelete("{id}")]
+        // public void Delete(int id)
+        // {
+        // }
     }
 }
