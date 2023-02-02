@@ -45,41 +45,39 @@ namespace FactoryProject.Models
 
 		public bool DeleteEmployee(int id)
 		{
-			
 			var ByeEmployee = _context.Employees.Where(employee => employee.id == id).First();
-			 var IsDepartmentManager =  _context.Departments.Where(dep => dep.manager == ByeEmployee.id).FirstOrDefault();
-			
-		if(IsDepartmentManager != null)
-		{
-		using(var transiction = _context.Database.BeginTransaction())
-		{
-			try {
-				IsDepartmentManager.manager = 0;
-				_context.Entry(IsDepartmentManager).Property("manager").IsModified = true;
-				_context.Employees.Remove(ByeEmployee);
-				_context.SaveChanges();
-				transiction.Commit();
-				return true;
-			}
-			catch (Exception)
-			{
-				transiction.Rollback();
-				return false;
-			}
-		}
-		}
-		else if(IsDepartmentManager == null)  
-		{
 			_context.Employees.Remove(ByeEmployee);
-				_context.SaveChanges();
-				return true;
+			_context.SaveChanges();
+			return true;
 		}
-		else {
-			return false;
-		}
-	}
 	}
 }
     
+
+	// using(var transiction = _context.Database.BeginTransaction())
+	// 	{
+	// 		try {				_context.Employees.Remove(ByeEmployee);
+
+	// 			IsDepartmentManager.manager = null;
+	// 			_context.Entry(IsDepartmentManager).Property("manager").IsModified = true;
+	// 		    _context.SaveChanges();
+	// 			transiction.Commit();
+	// 			return true;
+				
+	// 		}
+	// 		catch (Exception)
+	// 		{
+	// 			transiction.Rollback();
+	// 			return false;
+	// 		}
+	// 	}
+	// 	}
+	// 	else
+	// 	{
+	// 		_context.Remove(ByeEmployee);
+	// 		_context.SaveChanges();
+	// 		return true;
+	// 	}
+
 
 

@@ -63,7 +63,7 @@ namespace FactoryProject.Models
            }
            else if(ActionsLeft == 0 && LogoutDate != todayIs || ActionsLeft > 0 && LogoutDate != todayIs)
            {
-            int MaxActions = 25;
+            int MaxActions = 40;
               ActionsLeft = MaxActions;
                 current.numOfActions = ActionsLeft;
                 _context.SaveChangesAsync();

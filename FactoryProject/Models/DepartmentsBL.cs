@@ -48,16 +48,6 @@ namespace FactoryProject.Models
 
 		public void AddDepartment(Departments newDepartment) 
 		{
-			//var splash = _context.Departments.Add(newDepartment);
-			// if(splash.Entity.manager != null)
-			// {
-			// 	var CheckManager = _context.Employees.Where(emp => emp.id == splash.Entity.manager).FirstOrDefault();
-			// 	if(CheckManager != null)
-			// 	{
-			// 		CheckManager.departmentID = splash.Entity.id;
-			// 		_context.Entry(CheckManager).Property("departmentID").IsModified = true;
-			// 	}	
-			// }
 			 _context.Departments.Add(newDepartment);
 			_context.SaveChanges();  
 		}
