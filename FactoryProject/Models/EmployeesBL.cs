@@ -46,8 +46,25 @@ namespace FactoryProject.Models
 		public bool DeleteEmployee(int id)
 		{
 			var ByeEmployee = _context.Employees.Where(employee => employee.id == id).First();
-			_context.Employees.Remove(ByeEmployee);
-			_context.SaveChanges();
+			var CheckManager = _context.Departments.Where(dep => dep.manager == id).FirstOrDefault();
+			var CheckShifts = _context.IDs.Where(ids => ids.employeeID == id);
+			if(CheckManager != null && CheckManager.manager == ByeEmployee.id)
+			{
+				CheckManager.manager = null;
+                _context.Entry(CheckManager).Property("manager").IsModified = true;
+            }
+			if( CheckShifts != null && CheckShifts.Any() )
+			{
+				foreach (var shift in CheckShifts)
+				{
+                    _context.Entry(shift).Entity.shiftID = 0;
+
+                    _context.IDs.Remove(shift);
+
+                }
+            }
+			_context.Remove(ByeEmployee);
+            _context.SaveChanges();
 			return true;
 		}
 	}

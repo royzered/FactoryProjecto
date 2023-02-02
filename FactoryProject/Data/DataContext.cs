@@ -18,7 +18,8 @@ namespace FactoryProject.Data
         public DbSet<IDs> IDs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        { 
+
         }
     }
 }
