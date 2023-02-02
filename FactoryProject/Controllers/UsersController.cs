@@ -4,11 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.AspNetCore.Http;
-using System.Net.Http.Headers;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace FactoryProject.Controllers
 {

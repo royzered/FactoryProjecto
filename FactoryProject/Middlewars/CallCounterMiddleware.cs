@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using FactoryProject.Models;
 using Microsoft.AspNetCore.Http;
+using FactoryProject.Data;
 
 public class CallCOunterMiddleware 
 {
@@ -21,6 +22,7 @@ public class CallCOunterMiddleware
        {
         _counter++;
        }
+    
 
     }
 

@@ -72,6 +72,8 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseMiddleware<CallCOunterMiddleware>();
+app.UseEndpoints(endpoint =>
+endpoint.MapControllers());
 
 app.MapControllerRoute(
     name: "default",
