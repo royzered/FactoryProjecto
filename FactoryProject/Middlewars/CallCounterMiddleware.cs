@@ -26,7 +26,6 @@ public class CallCOunterMiddleware
 
     public static int GetCount(int UserActionLeft) 
     {
-        
         int LoggedUserActionLeft = UserActionLeft;
         if(LoggedUserActionLeft > 0)
             {
