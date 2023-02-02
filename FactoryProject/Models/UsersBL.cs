@@ -18,7 +18,9 @@ namespace FactoryProject.Models
         
         private static int ActionCounter = 0;
 
-        private static string? LoggedOutAt;
+        private static string? LoggedAt;
+        private static string? LogoutDate;
+
 
          private static Users currentUser = new Users();
 
@@ -45,11 +47,28 @@ namespace FactoryProject.Models
         public int UserActionLimit()
 		{
             var ActionsLeft = currentUser.numOfActions;
-            ActionCounter =  CallCOunterMiddleware.GetCount(ActionsLeft);
-            ActionsLeft = ActionCounter;
             var current = _context.Users.Where(user => user.id == currentUser.id).First();
-            current.numOfActions = ActionsLeft;
-            _context.SaveChangesAsync();
+            var todayIs = DateTime.Today.Date.ToShortDateString();
+            if(ActionsLeft > 0 && LoggedAt == todayIs)
+            {
+                 ActionCounter =  CallCOunterMiddleware.GetCount(ActionsLeft);
+                ActionsLeft = ActionCounter;
+                current.numOfActions = ActionsLeft;
+                _context.SaveChangesAsync();
+
+            }
+           else if(ActionsLeft == 0 && LoggedAt == todayIs)
+           {
+            LogOutUser();
+           }
+           else if(ActionsLeft == 0 && LogoutDate != todayIs || ActionsLeft > 0 && LogoutDate != todayIs)
+           {
+            int MaxActions = 25;
+              ActionsLeft = MaxActions;
+                current.numOfActions = ActionsLeft;
+                _context.SaveChangesAsync();
+           }
+
             return  current.numOfActions;
 		}
 
@@ -61,6 +80,7 @@ namespace FactoryProject.Models
 
             if(FindUser.numOfActions > 0) 
             {
+                LoggedAt = DateTime.Today.Date.ToShortDateString();
                 currentUser = FindUser;
                 return FindUser;
             }
@@ -93,6 +113,7 @@ namespace FactoryProject.Models
 
         public bool LogOutUser() 
         {
+            LogoutDate = DateTime.Today.Date.ToShortDateString();
             return true;   
         }
 	}

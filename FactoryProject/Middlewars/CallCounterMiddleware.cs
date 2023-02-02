@@ -15,7 +15,6 @@ public class CallCOunterMiddleware
     public async Task InvokeAsync(HttpContext context)
     {
         await _next(context);
-        
        if(context.Response.StatusCode == 200)
        {
         _counter++;
@@ -30,7 +29,7 @@ public class CallCOunterMiddleware
             {
                 LoggedUserActionLeft = LoggedUserActionLeft - _counter;
             }
-            else if(LoggedUserActionLeft <= 0)
+            else if(LoggedUserActionLeft == 0)
             {
                 LoggedUserActionLeft = 0;
             }

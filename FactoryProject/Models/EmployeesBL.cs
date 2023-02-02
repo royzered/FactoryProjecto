@@ -47,14 +47,13 @@ namespace FactoryProject.Models
 		{
 			
 			var ByeEmployee = _context.Employees.Where(employee => employee.id == id).First();
-			var CheckDepartmentsManager = _context.Departments.Where(dep => dep.manager == ByeEmployee.id).Any();
+			 var IsDepartmentManager =  _context.Departments.Where(dep => dep.manager == ByeEmployee.id).FirstOrDefault();
 			
-		if(CheckDepartmentsManager == true)
+		if(IsDepartmentManager != null)
 		{
 		using(var transiction = _context.Database.BeginTransaction())
 		{
 			try {
-			 var IsDepartmentManager =  _context.Departments.Where(dep => dep.manager == ByeEmployee.id).First();
 				IsDepartmentManager.manager = 0;
 				_context.Entry(IsDepartmentManager).Property("manager").IsModified = true;
 				_context.Employees.Remove(ByeEmployee);
@@ -69,11 +68,14 @@ namespace FactoryProject.Models
 			}
 		}
 		}
-		else 
+		else if(IsDepartmentManager == null)  
 		{
 			_context.Employees.Remove(ByeEmployee);
 				_context.SaveChanges();
 				return true;
+		}
+		else {
+			return false;
 		}
 	}
 	}
