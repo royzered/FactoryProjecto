@@ -72,7 +72,6 @@ namespace FactoryProject.Models
             return  current.numOfActions;
 		}
 
-       
 
         public Users LogInUser(string? UserName, string? Password) 
         {
