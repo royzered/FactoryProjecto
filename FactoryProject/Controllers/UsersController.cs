@@ -50,9 +50,18 @@ namespace FactoryProject.Controllers
 
         // GET: api/Users
         [HttpGet]
-         public int GetUsers()
+         public ActionResult GetUsers()
          {
-             return _usersBL.UserActionLimit();
+             int CurrentUserActionsLeft = _usersBL.UserActionLimit();
+             if(CurrentUserActionsLeft > 0)
+             {
+                return Ok(CurrentUserActionsLeft);
+             }
+             else
+             {
+                return Unauthorized("NO MORE ACTIONS LEFT FOR TODAY!");
+             }
+
          }
      
 

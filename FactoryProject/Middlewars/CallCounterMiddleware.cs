@@ -1,4 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using FactoryProject.Models;
 using Microsoft.AspNetCore.Http;
 
@@ -6,6 +7,7 @@ public class CallCOunterMiddleware
 {
     private readonly RequestDelegate  _next;
     private static int _counter;
+    
 
     public CallCOunterMiddleware(RequestDelegate next)
     {
@@ -24,12 +26,13 @@ public class CallCOunterMiddleware
 
     public static int GetCount(int UserActionLeft) 
     {
+        
         int LoggedUserActionLeft = UserActionLeft;
         if(LoggedUserActionLeft > 0)
             {
                 LoggedUserActionLeft = LoggedUserActionLeft - _counter;
             }
-            else if(LoggedUserActionLeft == 0)
+            else
             {
                 LoggedUserActionLeft = 0;
             }
