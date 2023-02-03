@@ -29,18 +29,13 @@ namespace FactoryProject
             return _shiftsBL.GetShifts();
         }
 
-         // GET: api/Shifts/EmpShifts/3
-        [HttpGet("ShiftDetailed")]
-        public IEnumerable<EmpShift> ShiftDetailed(int id)
-        {
-            return _shiftsBL.GetEmpShifts(id);
-        }
+    
 
         // GET: api/Shifts/5
         [HttpGet("{id}", Name = "GetEmployeeshift")]
         public IEnumerable<EmpShift> GetEmployeeShifts(int id)
         {
-         return _shiftsBL.GetEmpShifts(id);
+         return _shiftsBL.ShiftsByEmpId(id);
 
         }
 

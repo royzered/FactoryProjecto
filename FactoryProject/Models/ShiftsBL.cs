@@ -62,7 +62,40 @@ namespace FactoryProject.Models
             }
 
         return  EmpShiftDetailed.Where(shift => shift.id == ShiftId).ToList();
+        }   
+
+
+
+
+         public List<EmpShift> ShiftsByEmpId(int empId) 
+        {
+            List<EmpShift>  EmpShiftDetailed = new List<EmpShift>();
+
+            foreach (var item in _context.IDs)
+            {
+                var shift = _context.Shift.Where(shift => shift.id == item.shiftID).First();
+                EmpShift newEmpShift = new EmpShift();
+                var emp = _context.Employees.First(emp => item.employeeID == emp.id);
+                if(emp != null)
+                { 
+                    newEmpShift.employeeID = emp.id;
+                    newEmpShift.EmployeeName = $"{emp.firstName} {emp.lastName}";
+                }
+               
+                newEmpShift.id = shift.id;
+                newEmpShift.shiftDate = shift.Date.ToShortDateString();
+                newEmpShift.startTime = shift.startTime;
+                newEmpShift.endTime = shift.endTime;
+
+
+                EmpShiftDetailed.Add(newEmpShift);
+            }
+
+        return  EmpShiftDetailed.Where(shift => shift.employeeID == empId).ToList();
         }            
+
+
+
                                                                                                                                                                                                                                                      
         public void ChangeEmployeeShift(int EmployeeId, int ShiftChange)
         {

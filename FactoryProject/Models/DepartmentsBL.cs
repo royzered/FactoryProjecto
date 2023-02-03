@@ -42,7 +42,9 @@ namespace FactoryProject.Models
 				var employee = _context.Employees.Where(employee => employee.id == id).First();
 				departmentW.managerName = $"{employee.firstName} {employee.lastName}";
 			}
-
+			var DeleteDepartment = _context.Departments.Where(department => department.id == id).First();
+			bool EmployeesLeft = _context.Employees.Where(emp => emp.departmentID == id).Any();
+			departmentW.isEmpty = EmployeesLeft;
 			return departmentW;
 		}
 
@@ -69,6 +71,19 @@ namespace FactoryProject.Models
 			_context.SaveChanges();
 			}
 		
+		public bool checkIfDepEmpty(int id)
+		{
+			var DeleteDepartment = _context.Departments.Where(department => department.id == id).First();
+			bool EmployeesLeft = _context.Employees.Where(emp => emp.departmentID == id).Any();
+			if(EmployeesLeft == false)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 		public bool DeleteDepartment(int id) 
 		{
 			var DeleteDepartment = _context.Departments.Where(department => department.id == id).First();

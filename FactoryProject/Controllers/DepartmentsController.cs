@@ -52,6 +52,9 @@ namespace FactoryProject.Controllers
             return $"{DepartmentUpdate.departmentName}, ID {id} Has Been Updated.";
         }
 
+
+        
+
         // DELETE: api/Departments/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
