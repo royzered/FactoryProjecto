@@ -37,7 +37,7 @@ namespace FactoryProject.Models
             return newAssign.id;
         }
         
-        public List<EmpShift> GetEmpShifts(int ShiftId) 
+        public List<EmpShift> GetEmpShifts() 
         {
             List<EmpShift>  EmpShiftDetailed = new List<EmpShift>();
 
@@ -61,7 +61,7 @@ namespace FactoryProject.Models
                 EmpShiftDetailed.Add(newEmpShift);
             }
 
-        return  EmpShiftDetailed.Where(shift => shift.id == ShiftId).ToList();
+        return  EmpShiftDetailed;
         }   
 
 

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FactoryProject
 {
-   // [Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ShiftsController : ControllerBase
@@ -27,6 +27,12 @@ namespace FactoryProject
         public IEnumerable<Shift> GetShifts()
         {
             return _shiftsBL.GetShifts();
+        }
+
+            [HttpGet("getEmpShifts")]
+        public IEnumerable<EmpShift> GetEmpShifts()
+        {
+            return _shiftsBL.GetEmpShifts();
         }
 
     
