@@ -80,9 +80,6 @@ namespace FactoryProject.Models
            {
             return 0;
            }
-
-
-
 		}
 
 
@@ -114,9 +111,7 @@ namespace FactoryProject.Models
             {
                 CurrentUserID = user.id,
                 CurrentUserName = user.userName,
-                CurrentuserActionsleft = user.numOfActions,
-                CurrentReqDate = DateTime.Today.ToShortDateString()
-
+                CurrentuserActionsleft = user.numOfActions
             };
             return CurrentUserLoggedInfo;
         }
