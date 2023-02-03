@@ -13,23 +13,6 @@ namespace FactoryProject.Models
         }
 
         public   List<Shift> GetShifts() {
-            //     List<EmpShift>  EmpShiftDetailed = new List<EmpShift>();
-
-            //     foreach (var id in _context.IDs) 
-            //     {
-            //         var emp = _context.Employees.Where(emp => emp.id == id.employeeID).First();
-            //         var shift = _context.Shift.Where(shift => shift.id == id.shiftID).First();
-            //         EmpShift empShiftDits = new EmpShift();
-            //         empShiftDits.employeeID = emp.id;
-            //         empShiftDits.EmployeeName = $"{emp.firstName} {emp.lastName}";
-            //         empShiftDits.id = shift.id;
-            //         empShiftDits.shiftDate = shift.Date.ToShortDateString();
-            //         empShiftDits.startTime = shift.startTime;
-            //         empShiftDits.endTime = shift.endTime;
-            //         EmpShiftDetailed.Add(empShiftDits);
-            // }       
-            // return EmpShiftDetailed.ToList();
-
             return _context.Shift.ToList();
             
         }
@@ -49,34 +32,36 @@ namespace FactoryProject.Models
 
         public int EmployeeToShift(IDs newAssign)
         {
-            // var employee = _context.Employees.Where(employee => employee.id == newAssign.employeeID).First();
-            // var shift = _context.Shift.Where(shift => shift.id == newAssign.shiftID).First();
-            // IDs NewIds = new IDs();
-            // NewIds.employeeID = employee.id;
-            // NewIds.shiftID = shift.id;
             _context.IDs.Add(newAssign);
             _context.SaveChanges();
             return newAssign.id;
         }
         
-        public IEnumerable<EmpShift> GetEmpShifts(int ShiftId) 
+        public List<EmpShift> GetEmpShifts(int ShiftId) 
         {
             List<EmpShift>  EmpShiftDetailed = new List<EmpShift>();
 
-            foreach (var id in _context.IDs) 
-			{
-				var emp = _context.Employees.Where(emp => emp.id == id.employeeID).First();
-                var shift = _context.Shift.Where(shift => shift.id == id.shiftID).First();
-				 EmpShift empShiftDits = new EmpShift();
-                 empShiftDits.employeeID = emp.id;
-                 empShiftDits.EmployeeName = $"{emp.firstName} {emp.lastName}";
-                 empShiftDits.id = shift.id;
-                 empShiftDits.shiftDate = shift.Date.ToShortDateString();
-                 empShiftDits.startTime = shift.startTime;
-                 empShiftDits.endTime = shift.endTime;
-				EmpShiftDetailed.Add(empShiftDits);
-        }       
-        return EmpShiftDetailed.Where(shift => shift.id == ShiftId).ToList();       
+            foreach (var item in _context.IDs)
+            {
+                var shift = _context.Shift.Where(shift => shift.id == item.shiftID).First();
+                EmpShift newEmpShift = new EmpShift();
+                var emp = _context.Employees.FirstOrDefault(emp => item.employeeID == emp.id);
+                if(emp != null)
+                { 
+                    newEmpShift.employeeID = emp.id;
+                    newEmpShift.EmployeeName = $"{emp.firstName} {emp.lastName}";
+                }
+               
+                newEmpShift.id = shift.id;
+                newEmpShift.shiftDate = shift.Date.ToShortDateString();
+                newEmpShift.startTime = shift.startTime;
+                newEmpShift.endTime = shift.endTime;
+
+
+                EmpShiftDetailed.Add(newEmpShift);
+            }
+
+        return  EmpShiftDetailed.Where(shift => shift.id == ShiftId).ToList();
         }            
                                                                                                                                                                                                                                                      
         public void ChangeEmployeeShift(int EmployeeId, int ShiftChange)
