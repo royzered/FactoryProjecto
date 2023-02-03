@@ -80,10 +80,10 @@ namespace FactoryProject.Controllers
                 var token = GenerateToken(auth);
                 return Ok(token);
             }
-            else if (auth.numOfActions == 0)
+            else if (auth.numOfActions <= 0)
             {
                 bool LogUserOut = _usersBL.LogOutUser();
-                return Ok(LogUserOut);
+                return  Unauthorized("You Have Reached Your Daily Action Limit.");
             }
             else
             {
@@ -97,8 +97,8 @@ namespace FactoryProject.Controllers
         [HttpPost("UserInfo")]
         public ActionResult UserInfo([FromBody] string token)
         {
-            var oooo = _usersBL.UserInfoFromToken(token);
-            return Ok(oooo);
+            var userInfo = _usersBL.UserInfoFromToken(token);
+            return Ok(userInfo);
         }
 
 
@@ -130,15 +130,3 @@ namespace FactoryProject.Controllers
 }
 
 
-//Tried to implement a cookie but not successfully, might try and fix later (?)
-               // var TokenHandler = new JwtSecurityTokenHandler();
-                // var SecurityToken = TokenHandler.ReadToken(token) as JwtSecurityToken;
-                // var userId = SecurityToken.Claims.First(c => c.Type == JwtRegisteredClaimNames.Sub).Value;
-                // CookieOptions cookieOptions = new CookieOptions 
-                // {
-                //     HttpOnly = true,
-                //     Secure = true, 
-                //     SameSite = SameSiteMode.None,
-                //     IsEssential = true
-                // };
-                // HttpContext.Response.Cookies.Append("Authorization", "Bearer " + token, cookieOptions);

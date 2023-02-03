@@ -32,20 +32,17 @@ namespace FactoryProject.Models
 		}
 
 		public DepartmentsWname getDepartment(int id) {
-			DepartmentsWname departmentW = new DepartmentsWname();
-			var department = _context.Departments.Where(department => department.id == id).First();
-			departmentW.id = department.id;
-			departmentW.departmentName = department.departmentName;
-			if(departmentW.manager != null)
-			{
-				departmentW.manager = department.manager;
-				var employee = _context.Employees.Where(employee => employee.id == id).First();
-				departmentW.managerName = $"{employee.firstName} {employee.lastName}";
-			}
-			var DeleteDepartment = _context.Departments.Where(department => department.id == id).First();
-			bool EmployeesLeft = _context.Employees.Where(emp => emp.departmentID == id).Any();
-			departmentW.isEmpty = EmployeesLeft;
-			return departmentW;
+				DepartmentsWname departmentW = new DepartmentsWname();
+				var department = _context.Departments.Where(department => department.id == id).First();
+				departmentW.id = department.id;
+				departmentW.departmentName = department.departmentName;
+				if(departmentW.manager != null)
+				{
+					departmentW.manager = department.manager;
+					var employee = _context.Employees.Where(employee => employee.id == id).First();
+					departmentW.managerName = $"{employee.firstName} {employee.lastName}";
+				}
+				return departmentW;
 		}
 
 		public void AddDepartment(Departments newDepartment) 
@@ -71,19 +68,7 @@ namespace FactoryProject.Models
 			_context.SaveChanges();
 			}
 		
-		public bool checkIfDepEmpty(int id)
-		{
-			var DeleteDepartment = _context.Departments.Where(department => department.id == id).First();
-			bool EmployeesLeft = _context.Employees.Where(emp => emp.departmentID == id).Any();
-			if(EmployeesLeft == false)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
+	
 		public bool DeleteDepartment(int id) 
 		{
 			var DeleteDepartment = _context.Departments.Where(department => department.id == id).First();

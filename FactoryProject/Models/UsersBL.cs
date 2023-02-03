@@ -32,13 +32,6 @@ namespace FactoryProject.Models
 
         public int GetUser() 
         {
-            // var TokenHandler = new JwtSecurityTokenHandler();
-            // var JsonToken  = TokenHandler.ReadToken(token);
-            // var TokenSec = TokenHandler.ReadToken(token) as JwtSecurityToken;
-            // var UserId =  TokenSec.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Sub).Value;
-        
-            // var UserInDb = _context.Users.Where(user => user.id == Int32.Parse(UserId)).First();
-            // return UserInDb;
             return ActionCounter;
 
         }
@@ -66,11 +59,12 @@ namespace FactoryProject.Models
            }
            else if(ActionsLeft == 0 && LogoutDate != todayIs || ActionsLeft > 0 && LogoutDate != todayIs)
            {
-            int MaxActions = 60;
+            int MaxActions = 100;
             current.numOfActions = MaxActions;
             _context.Entry(current).Property("numOfActions").IsModified = true;
+            ActionCounter =  CallCOunterMiddleware.GetCount(ActionsLeft);
+            _context.SaveChangesAsync();
 
-                _context.SaveChangesAsync();
            }
            if(current.numOfActions > 0)
            {

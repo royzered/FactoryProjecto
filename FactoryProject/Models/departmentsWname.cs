@@ -12,7 +12,6 @@ namespace FactoryProject.Models
         public int? manager { get; set; }
         
         public string? managerName { get; set; }
-        public bool? isEmpty { get; set; }
     }
 }
 
