@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factory Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="clr(); UserFunction(); departmentSelect(); displayEmployeeInfo()">
+    <div class="hd">
+        <nav>     
+            <header id="hdr">
+                <h5> <a class="homeDivLink" href="./Homepage.html"> Factory Management </a> </h5>  
+            </header>
+            <div class="logoutDiv" id="logoutDiv" onclick="logout();">Logout</div>
+            <div class="navLinks">
+                <a href="./Employees.html">Employees</a>
+                <a href="./Departments.html">Departemnt</a>
+               <a href="./Shifts.html">Shifts</a>
+            </div>
+        </nav>
+       
+        </div>
+    </div>
+    
+
+<div class="mainDiv">
+    <div>
+        <div>
+            <div class="Spanh2" id="AddEmployee">
+                <h2>
+                    Add Employee
+                </h2>
+                First Name <input type="text" name="firstName" id="firstName"> 
+                Last Name <input type="text" name="lastName" id="lastName"> <br> <br>
+                Department <select id="depSelect" onchange="showVal()"> 
+                    <option id="depSelectVal" value="">Select Department</option>
+                </select>
+                start Year <input type="text"  name="startYear" id="startYear">  <br> <br>
+        
+                <button onclick="newEmployeeAdd(); clr();">Add Employee</button>
+                <span id="employeeAdded"></span>
+            </div>
+        
+    </div>
+    
+
+
+</body>
+<script src="pstmn.js"></script>
+<script src="template.js"></script>
+</html>

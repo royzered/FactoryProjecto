@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Factory Management</title>
+</head>
+<body onload="clr(); UserFunction(); assignShiftSelect();">
+    <div class="hd">
+        <nav>     
+            <header id="hdr">
+                <h5> <a class="homeDivLink" href="./Homepage.html"> Factory Management </a> </h5>  
+            </header>
+            <div class="logoutDiv" id="logoutDiv" onclick="logout();">Logout</div>
+            <a href="./Employees.html">Employees</a>
+            <a href="./Departments.html">Departemnt</a>
+           <a href="./Shifts.html">Shifts</a>
+        </nav>
+       
+        </div>
+    </div>
+    
+
+    <div>
+        <div class="Spanh2">
+            Assign Employee to a Shift
+        </div>
+    </div>
+<div class="assignShiftDiv">
+
+    <div>
+        <select id="employeeSelect">
+            <option>
+                Select Employee
+            </option>
+        </select>
+
+        <select id="shiftsSelect">
+            <option>Select Shift</option>
+        </select>
+        
+    </div>
+    <div>
+        <br>
+        <button onclick="assignShift();">Add Shift to Employee</button>
+        <span id="assignedShift"></span>
+    </div>
+
+</div>
+</div>
+    </div>
+
+
+    
+</body>
+<script src="pstmn.js"></script>
+<script src="template.js"></script>
+</html>

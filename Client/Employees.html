@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factory Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="getEmployees(); UserFunction();">
+ 
+<div class="hd">
+    <nav>     
+        <header id="hdr">
+            <h5> <a class="homeDivLink" href="./Homepage.html"> Factory Management </a> </h5>  
+        </header>
+        <div class="logoutDiv" id="logoutDiv" onclick="logout();">Logout</div>
+        <a href="./Employees.html">Employees</a>
+        <a href="./Departments.html">Departemnt</a>
+       <a href="./Shifts.html">Shifts</a>
+    </nav>
+   
+    </div>
+</div>
+
+
+<div class="mainDiv">
+    <div>
+        <div class="Spanh2">
+            Employees
+        </div>
+    </div>
+
+        <input type="text" class="searchInput" id="searchInput" placeholder="Search an employee">
+        <button class="searchButton" id="searchButton" onclick="searchBar()">Search</button>
+        <span id="cannot" class="cannot"></span>
+   
+    <div class="empDiv" id="empDiv">
+        <div class="employeeTable">
+            <table>
+                <thead>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Full Name
+                    </th>
+                    <th>
+                        Department
+                    </th>
+                    <th>Start Year</th>
+                    <th>Shifts</th>
+                    <th>Options</th>
+                </thead>
+                <tbody id="tBody">
+                </tbody>
+            </table>
+            <span id="employeeDeletedSpan" onclick="getEmployees();"></span>
+        </div>
+    
+        <br>
+    
+        <div id="AddEmployee">
+            <h2>
+                <a class="addEmp" href="./AddEmployee.html"> 
+                    Add Employee
+                </a>
+            </h2>
+        </div>
+    </div>
+    
+</div>
+
+</body>
+<script src="pstmn.js"></script>
+<script src="template.js"></script>
+</html>

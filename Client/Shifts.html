@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Factory Management</title>
+</head>
+<body onload="clr(); UserFunction(); getShifts();">
+    <div class="hd">
+        <nav>     
+            <header id="hdr">
+                <h5> <a class="homeDivLink" href="./Homepage.html"> Factory Management </a> </h5>  
+            </header>
+            <div class="logoutDiv" id="logoutDiv" onclick="logout();">Logout</div>
+            <a href="./Employees.html">Employees</a>
+            <a href="./Departments.html">Departemnt</a>
+           <a href="./Shifts.html">Shifts</a>
+        </nav>
+        </div>
+    </div>
+    
+    <br>
+    <br>
+
+    <div>
+        <div class="Spanh2">
+            Shifts
+        </div>
+    </div>
+    <div id="shiftDiv" class="shiftDiv">
+        <div class="employeeTable">
+            <table>
+                <thead>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Assigned Employees</th>
+                </thead>
+                <tbody id="shiftTBody">
+
+                </tbody>
+            </table>
+            <br>
+            <div id="AddEmployee">
+                <h2>
+                    <a class="addEmp" href="./AddShift.html"> 
+                        Add Shift
+                    </a>
+                   
+                </h2>
+        
+            </div>
+        
+         
+        </div>
+    </div>
+    
+
+
+
+    
+</body>
+<script src="pstmn.js"></script>
+<script src="template.js"></script>
+</html>

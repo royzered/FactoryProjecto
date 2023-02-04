@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700;800&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+.hd {
+    margin: auto;
+    text-align: center;
+}
+.logoutDiv {
+    font-weight: 500;
+    background-color: #f0e158;
+    color: #000;
+    font-size: small;
+    width: fit-content;
+    transition: 0.2s;
+    position: absolute;
+}
+.logoutDiv:hover {
+    font-weight: 600;
+    font-size: medium;
+}
+
+nav{
+    margin-top: -15px;
+}
+
+
+.Spanh1, .Spanh2{
+    font-family: 'Work Sans', sans-serif;
+    font-size: 40px;
+    text-align: center;
+}
+.Spanh1{
+    font-size: 70px;
+    margin: auto;
+    width: 50%;
+}
+.Spanh2{
+    padding: 15px;
+    transition: 0.2s;
+}
+/* .Spanh2:hover {
+    background-color: #fff;
+    color: #000;
+} */
+
+.para1 {
+    text-align: left;
+}
+
+body{
+    font-family: 'Work Sans', sans-serif;
+    color: #fff;
+    background-image: linear-gradient(to left, #2a1255 0%,#394888 100%); 
+}
+
+h1{
+    font-family: 'Spectral', serif;
+    font-size: 50px;
+}
+
+a{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-family: 'Work Sans', sans-serif;
+    transition: 0.3s;
+    padding: 20px;
+}
+a::after{
+    color: #fff;
+}
+a:hover{
+    text-shadow: 0.3px 2px 20px;
+    border-radius: 20px;
+}
+.homeDivLink:hover
+{
+    text-shadow: none;
+
+}
+
+.addEmp
+{
+    background: radial-gradient(#e6646415, #9198e52a);
+    transition: 0.4s;
+}
+.addEmp:hover{
+    background: radial-gradient(#e66464d2, #9198e5d7);
+    text-shadow: none;
+
+
+}
+    
+
+.mainDiv {
+    width: fit-content;
+    display: contents;
+    text-align: center;
+    justify-content: center;
+    width: fit-content;
+    margin: auto;
+}
+
+input, button{
+    background-color: #281d4715;
+    border: solid 0.2px rgb(255, 255, 255);
+    border-radius: 2em;
+    color: #fff;
+    transition: 0.2s;
+}
+input{
+    background-color: rgba(66, 87, 146, 0.315);
+}
+button:hover, input:hover{
+    background-color: #fff;
+    color: #000;
+}
+
+header {
+    font-family: 'Spectral', serif;
+    position: relative;
+    top: 0;
+}
+h3, h5{
+    margin: auto;
+    position: absolute;
+    width: 100%;
+    display: block;
+}
+h5{
+    font-size: 40px;
+    position: inherit;
+}
+
+.loginUserInput {
+text-align: center;
+margin-top: 5em;
+}
+
+.loginError {
+    color: rgb(223, 209, 18);
+}
+
+.empDiv, .depDiv, .shiftDiv, .assignShiftDiv {
+    display: block;
+    text-align: center;
+    width: max-content;
+    height: max-content;
+    margin: auto;
+}
+
+.assignShiftDiv
+{
+    margin-top: 40px;
+}
+
+tbody {
+    text-align: center;
+}
+
+.employeeTable {
+    text-align: center;
+    border-collapse: separate;
+    table-layout: fixed;
+    width: 100%;
+    font-size: 20px;
+}
+td{
+    padding: 5px;
+}
+
+.searchInput {
+    position: fixed;
+    border-radius: 3px;
+}
+.searchButton {
+    margin-top: 30px;
+    border-radius: 3px;
+    position: fixed;
+}
+.cannot {
+    position: fixed;
+    margin-top: 50px;
+    font-weight: 600;
+}
+
+
+
+.homeDiv {
+    position: relative;
+    top: 3em;
+    font-size: 20px;
+    display: flex;
+    flex-flow: column;
+    width: 50%;
+    margin: auto;
+}
+h4 {
+    background-color: rgba(255, 255, 255, 0.055);
+    transition: 0.3s;
+}
+h4:hover{
+    background-color: rgba(255, 255, 255, 0.093); ;
+}
+
+.hello 
+{
+    font-size: large;
+    background-color: rgba(255, 255, 255, 0.011);
+    width: fit-content;
+    height: fit-content;
+    display: block;
+    margin: auto;
+}
+
+
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 100;}
+}
+
+@keyframes fadeOut {
+    from {opacity: 100;}
+    to {opacity: 0;}
+}

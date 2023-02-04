@@ -1,7 +1,6 @@
 # FactoryProjecto
 
-Factory Management - A simple CRUD operations web app
+Factory Management
 
-Backend built with .NET Core and Frontend will be built with HTML, CSS & JavaScript.
+Backend built with .NET Core and Frontend with HTML, CSS & JavaScript.
 
-**Work in progress**
