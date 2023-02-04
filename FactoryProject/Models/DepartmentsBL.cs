@@ -47,9 +47,23 @@ namespace FactoryProject.Models
 
 		public void AddDepartment(Departments newDepartment) 
 		{
-			 _context.Departments.Add(newDepartment);
-			_context.SaveChanges();  
+		    var dep = _context.Departments.Add(newDepartment);
+			_context.SaveChanges();
+			ChangeManagerDep((int)newDepartment.manager, dep.Entity.id);
 		}
+
+
+		public void ChangeManagerDep (int id, int depId)
+		{
+			var emp = _context.Employees.Where(emp => emp.id == id).First();
+			if(emp != null)
+			{
+				emp.departmentID = depId;
+				_context.Entry(emp).Property("departmentID").IsModified = true;
+			}
+			_context.SaveChanges();
+		}
+
 
 		public void EditDepartment(int id, Departments DepartmentEdit) 
 		{

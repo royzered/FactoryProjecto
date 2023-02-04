@@ -105,6 +105,7 @@ namespace FactoryProject.Models
             {
                 CurrentUserID = user.id,
                 CurrentUserName = user.userName,
+                CurrentUserFullName = user.fullName, 
                 CurrentuserActionsleft = user.numOfActions
             };
             return CurrentUserLoggedInfo;
