@@ -428,6 +428,22 @@ async function updateEmployee() {
 }
 
 
+async function employeeSelect(employeeSelect) {
+  
+    let resp1 = await fetch('http://localhost:5231/api/employees', 
+    {   method : 'GET',
+        headers : headersOptions
+    });
+    let data1 = await resp1.json();
+    data1.forEach(emp => {
+        let employeeOption = document.createElement("option");
+        employeeOption.textContent = `${emp.firstName}  ${emp.lastName}`;
+        employeeOption.value = emp.id;
+        employeeSelect.appendChild(employeeOption);
+    });
+}
+
+
 
 
 //#endregion
@@ -538,10 +554,21 @@ async function departmentSelect() {
     });
 }
 
+
+async function chooseNewDepManager() {
+    let departmentManager = document.getElementById("departmentManager");
+    let empOptions = await employeeSelect(departmentManager);
+    
+    
+}
+
 async function addDepartment() {
     let departmentName = document.getElementById("departmentName").value;
+
     let departmentManager = document.getElementById("departmentManager").value;
+    
     let addedDepSpan = document.getElementById("addedDep");
+
     let departmentData = {
         "departmentName" : departmentName, 
         "manager" : +departmentManager
@@ -561,22 +588,15 @@ async function addDepartment() {
     addedDepSpan.innerText = data;
 }
 
+
 async function displayDepartmentInfo() {
     let idFromUrl = window.location.href.split('=').reverse()[0];
     let departmentID = document.getElementById("departmentIdU");
     let departmentName = document.getElementById("departmentNameU");
     let departmentManager = document.getElementById("departmentManagerU");
-    let resp1 = await fetch('http://localhost:5231/api/employees', 
-    {   method : 'GET',
-        headers : headersOptions
-    });
-    let data1 = await resp1.json();
-    data1.forEach(emp => {
-        let employeeOption = document.createElement("option");
-        employeeOption.textContent = `${emp.firstName}  ${emp.lastName}`;
-        employeeOption.value = emp.id;
-        departmentManager.appendChild(employeeOption);
-    });
+    let empOptions = await employeeSelect(departmentManager);
+    
+   
 
     let resp = await fetch(`http://localhost:5231/api/departments/${idFromUrl}`, {
         method : "GET",
@@ -709,6 +729,7 @@ if(resp.status == 200)
 
 async function assignShiftSelect() {
     let shiftsSelect = document.getElementById("shiftsSelect");
+    let empSelect = document.getElementById("employeeSelect");
     let resp = await fetch('http://localhost:5231/api/shifts', 
     {   method : 'GET',
         headers : headersOptions
@@ -722,19 +743,8 @@ async function assignShiftSelect() {
         shiftsSelect.appendChild(shiftOption);
     });
 
-    let employeeSelect = document.getElementById("employeeSelect");
-    let resp1 = await fetch('http://localhost:5231/api/employees', 
-    {   method : 'GET',
-        headers : headersOptions
-    });
-    let data1 = await resp1.json();
-    data1.forEach(emp => {
-        let employeeOption = document.createElement("option");
-        employeeOption.textContent = `${emp.firstName}  ${emp.lastName}`;
-        employeeOption.value = emp.id;
-        employeeSelect.appendChild(employeeOption);
-    });
-    for(let option of employeeSelect){
+     let empOpt = await employeeSelect(empSelect);
+    for(let option of empSelect){
         let idFromUrl = window.location.href.split('=').reverse()[0];
         if(option.value == idFromUrl)
         {

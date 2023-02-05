@@ -87,7 +87,10 @@ namespace FactoryProject.Models
                 currentUser = FindUser;
                 return FindUser;
             }
-
+            else if(FindUser.numOfActions <= 0)
+            {
+                return FindUser;
+            }
             else
             {
                 return null;

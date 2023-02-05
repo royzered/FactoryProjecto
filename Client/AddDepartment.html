@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Factory Management</title>
 </head>
-<body onload="clr(); UserFunction();">
+<body onload="clr(); UserFunction(); chooseNewDepManager();">
     <div class="hd">
         <nav>     
             <header id="hdr">
@@ -32,7 +32,9 @@
 
     <div>
         Department Name <input type="text" name="departmentName" id="departmentName"> <br> <br>
-        Manager (ID Number) <input type="text" Manager="departmentManager" id="departmentManager">
+        Manager <select id="departmentManager">
+            <option value="0">Choose a Manager</option>
+           </select>
     </div>
     <div>
         <br>
