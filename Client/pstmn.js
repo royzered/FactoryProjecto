@@ -3,21 +3,32 @@
 
 
 //#region Login Page / User Functions 
+
+
 function superEnter() {
     let username = document.getElementById("userName");
     let password = document.getElementById("password");
-    username.addEventListener("keypress", (key) => {
+   enterSend(username);
+   enterSend(password);
+}
+
+function searchEnter() {
+    let search = document.getElementById("searchInput");
+    search.addEventListener("keypress", (key) => {
+        if(key.key == "Enter")
+        {
+            document.getElementById("searchButton").click();
+        }
+       });
+}
+
+function enterSend(element) {
+    element.addEventListener("keypress", (key) => {
         if(key.key == "Enter") 
         {
             document.getElementById("loginButton").click();
         }
-    });
-    password.addEventListener("keypress", (key) => {
-        if(key.key == "Enter") 
-        {
-            document.getElementById("loginButton").click();
-        }
-    });
+    });  
 }
 
 async function login(username, password){

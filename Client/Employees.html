@@ -7,7 +7,7 @@
     <title>Factory Management</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body onload="getEmployees(); UserFunction();">
+<body onload="getEmployees(); UserFunction(); searchEnter()">
  
 <div class="hd">
     <nav>     
@@ -34,7 +34,9 @@
         <input type="text" class="searchInput" id="searchInput" placeholder="Search an employee">
         <button class="searchButton" id="searchButton" onclick="searchBar()">Search</button>
         <span id="cannot" class="cannot"></span>
-   
+    <p id="loader" class="loader">
+
+    </p>
     <div class="empDiv" id="empDiv">
         <div class="employeeTable">
             <table>
@@ -57,8 +59,7 @@
             </table>
             <span id="employeeDeletedSpan" onclick="getEmployees();"></span>
         </div>
-    
-        <br>
+
     
         <div id="AddEmployee">
             <h2>

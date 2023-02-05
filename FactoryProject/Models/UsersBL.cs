@@ -41,8 +41,11 @@ namespace FactoryProject.Models
 		{
             var ActionsLeft = currentUser.numOfActions;
             var current = _context.Users.Where(user => user.id == currentUser.id).First();
-            var todayIs = DateTime.Today.Date.ToShortDateString();
             int Checker = 0;
+
+            var todayIs = DateTime.Today.Date.ToShortDateString();
+
+
             if(ActionsLeft > 0 && LoggedAt == todayIs)
             {
                  ActionCounter =  CallCOunterMiddleware.GetCount(ActionsLeft);
@@ -52,12 +55,12 @@ namespace FactoryProject.Models
                 _context.SaveChangesAsync();
 
             }
-           else if(ActionsLeft >= 0 && LoggedAt == todayIs)
+           else if(ActionsLeft <= 0 && LoggedAt == todayIs)
            {
             LogOutUser();
             Checker = 0;
            }
-           else if(ActionsLeft == 0 && LogoutDate != todayIs || ActionsLeft > 0 && LogoutDate != todayIs)
+           else if(ActionsLeft <= 0 && LogoutDate != todayIs || ActionsLeft > 0 && LogoutDate != todayIs || ActionsLeft <= 0 && LoggedAt != todayIs || ActionsLeft > 0 && LoggedAt != todayIs )
            {
             int MaxActions = 100;
             current.numOfActions = MaxActions;
