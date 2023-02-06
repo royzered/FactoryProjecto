@@ -11,6 +11,17 @@ function clr() {
     }
 }
 
+function loader(res) {
+
+    let loader = document.getElementById("loader");
+    if(res.ok) 
+    {
+        loader.style.display = "none";
+    }
+    
+}
+
+
 // let x = 1;
 // let divs = [document.getElementById("empDiv"), document.getElementById("depDiv"), document.getElementById("shiftDiv")];
 

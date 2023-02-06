@@ -253,13 +253,11 @@ async function logout() {
 //#endregion
 
 
-
 //#region Employees
 
 
 
 async function getEmployees() {
-    let loader = document.getElementById("loader");
     let requestParams = {
       method: 'GET',
       credantials : 'include',
@@ -282,10 +280,7 @@ async function getEmployees() {
         headers : headersOptions
 });
     let empShiftsData = await empShifts.json();
-    if(empShifts.ok) 
-    {
-        loader.style.display = "none";
-    }
+    loader(empShifts);
 
     let employeeTable = document.getElementById("tBody");
     employeeTable.innerHTML = "";
@@ -490,6 +485,7 @@ async function getDepartments() {
       let employeeData = await employeeResp.json();
       const emptyDep = [];
 
+      loader(resp);
 
 
     data.forEach(dp => {
@@ -670,6 +666,7 @@ async function getShifts() {
         headers : headersOptions
 });
     let data = await resp.json();
+    loader(resp);
     
     let employees = await fetch(`http://localhost:5231/api/shifts/GetEmpShifts`, {
         method : "GET",
