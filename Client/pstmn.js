@@ -259,6 +259,7 @@ async function logout() {
 
 
 async function getEmployees() {
+    let loader = document.getElementById("loader");
     let requestParams = {
       method: 'GET',
       credantials : 'include',
@@ -281,7 +282,10 @@ async function getEmployees() {
         headers : headersOptions
 });
     let empShiftsData = await empShifts.json();
-    console.log(empShiftsData);
+    if(empShifts.ok) 
+    {
+        loader.style.display = "none";
+    }
 
     let employeeTable = document.getElementById("tBody");
     employeeTable.innerHTML = "";
