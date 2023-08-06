@@ -1,6 +1,4 @@
-# FactoryProjecto
+# Factory Management - Web App Project
 
-Factory Management
-
-Backend built with .NET Core and Frontend with HTML, CSS & JavaScript.
+A factory management web application, Backend is .NET Core and Frontend built with HTML, CSS and JavaScript.
 
